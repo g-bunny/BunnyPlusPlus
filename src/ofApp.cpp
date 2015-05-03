@@ -64,6 +64,15 @@ void ofApp::draw(){
     ofSetCircleResolution(30);
     
     ear1->draw();
+    ear2->draw();
+    leg1->draw();
+    leg2->draw();
+    arm1->draw();
+    arm2->draw();
+    body1->draw();
+    head->draw();
+    leftEye->draw();
+    rightEye->draw();
     
 //    ear2.scaleX = 0.8;
 //    ear2.scaleY = 1;
@@ -77,50 +86,50 @@ void ofApp::draw(){
     
 
     
-    body1.transX = 520;
-    body1.transY = 85;
-    body1.transZ = 0;
-    body1.xPos = 90;
-    body1.yPos = 100;
-    body1.xPosLeft = 0;
-    body1.yPosLeft = 300;
-    body1.xPosRight = 190;
-    body1.yPosRight = 300;
-    body1.scaleX =1.3;
-    body1.scaleY =1.8;
-    body1.scaleZ =1;
-    body1.color = ofColor(100,100,100);
-    body1.draw();
+//    body1.transX = 520;
+//    body1.transY = 85;
+//    body1.transZ = 0;
+//    body1.xPos = 90;
+//    body1.yPos = 100;
+//    body1.xPosLeft = 0;
+//    body1.yPosLeft = 300;
+//    body1.xPosRight = 190;
+//    body1.yPosRight = 300;
+//    body1.scaleX =1.3;
+//    body1.scaleY =1.8;
+//    body1.scaleZ =1;
+//    body1.color = ofColor(100,100,100);
+//    body1.draw();
     
-    head.xPos = 640;
-    head.yPos = 310;
-    head.width = 200;
-    head.height = 200;
-    head.color = ofColor(0,0,255);
-    head.scaleZ = 1;
-    head.scaleX = 1;
-    head.scaleY = 1;
-    head.draw();
-    
-    leftEye.xPos = 605;
-    rightEye.xPos = 680;
-    leftEye.yPos = 328;
-    rightEye.yPos = 328;
-    leftEye.width = 10;
-    rightEye.width = 10;
-    leftEye.height = 10;
-    rightEye.height = 10;
-    leftEye.scaleY = 1;
-    leftEye.scaleX = 1;
-    leftEye.scaleZ = 1;
-    rightEye.scaleZ = 1;
-    rightEye.scaleY = 1;
-    rightEye.scaleX = 1;
-    leftEye.color = ofColor(0,0,0);
-    rightEye.color = ofColor(0,0,0);
-    rightEye.draw();
-    leftEye.draw();
+//    head.xPos = 640;
+//    head.yPos = 310;
+//    head.width = 200;
+//    head.height = 200;
+//    head.color = ofColor(0,0,255);
+//    head.scaleZ = 1;
+//    head.scaleX = 1;
+//    head.scaleY = 1;
+//    head.draw();
 //    
+//    leftEye.xPos = 605;
+//    rightEye.xPos = 680;
+//    leftEye.yPos = 328;
+//    rightEye.yPos = 328;
+//    leftEye.width = 10;
+//    rightEye.width = 10;
+//    leftEye.height = 10;
+//    rightEye.height = 10;
+//    leftEye.scaleY = 1;
+//    leftEye.scaleX = 1;
+//    leftEye.scaleZ = 1;
+//    rightEye.scaleZ = 1;
+//    rightEye.scaleY = 1;
+//    rightEye.scaleX = 1;
+//    leftEye.color = ofColor(0,0,0);
+//    rightEye.color = ofColor(0,0,0);
+//    rightEye.draw();
+//    leftEye.draw();
+//
 //    ear3.scaleX = 1;
 //    ear3.scaleY = 1;
 //    ear3.scaleZ = 1;
