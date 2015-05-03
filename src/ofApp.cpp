@@ -16,7 +16,17 @@ void ofApp::setup(){
     numOfFrames = 4;
     numOfColumns = 2;
 
+    
     this->ear1 = new WaterDrop(0.8, 1, 1, 605, 300, 100, 180, ofColor(255, 0, 0));
+    this->ear2 = new WaterDrop(0.8, 1, 1, 695, 300, 100, 180, ofColor(205,0,255));
+    this->leg1 = new WaterDrop(1,1,1,505,300,100,10,ofColor(5,255,0));
+    this->leg2 = new WaterDrop(1,1,1,695,300,100,30,ofColor(5,255,255));
+    this->arm1 = new WaterDrop(0.5,0.5,0.5, 300, 300, 50, 90, ofColor(255,100,100));
+    this->arm2 = new WaterDrop(0.5,0.5,0.5, 300, 300, 50, 270, ofColor(100,100,255));
+    this->body1 = new Body(1.3, 1.8, 1, 520, 85, 0, 90, 100, 0, 300, 190, 300, ofColor(200,100,100));
+    this->head = new Head(1,1,1,640,310,200,200, ofColor(100,100,200));
+    this->leftEye = new Head(1,1,1, 605, 328, 10, 10, ofColor(0,0,0));
+    this->rightEye = new Head(1,1,1, 680, 328, 10, 10, ofColor(0,0,0));
 //    ear1.setup();
 //    ear2.setup();
 //    ear3.setup();
