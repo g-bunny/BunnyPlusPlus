@@ -50,15 +50,6 @@ class ofApp : public ofBaseApp{
     Head *head;
     Head *leftEye;
     Head *rightEye;
-//    WaterDrop ear2;
-//    WaterDrop ear3;
-//    WaterDrop leg1;
-//    WaterDrop leg2;
-//    WaterDrop arm1, arm2;
-//    Head head;
-//    Head leftEye, rightEye;
-//    Body body1;
-    
     
 private:
     ofxTransparentWindow transparent;
