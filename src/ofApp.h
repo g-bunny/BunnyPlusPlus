@@ -41,14 +41,23 @@ class ofApp : public ofBaseApp{
     
     ofColor color;
     WaterDrop *ear1;
+    WaterDrop *ear2;
+    WaterDrop *leg1;
+    WaterDrop *leg2;
+    WaterDrop *arm1;
+    WaterDrop *arm2;
+    Body *body1;
+    Head *head;
+    Head *leftEye;
+    Head *rightEye;
 //    WaterDrop ear2;
 //    WaterDrop ear3;
 //    WaterDrop leg1;
 //    WaterDrop leg2;
 //    WaterDrop arm1, arm2;
-    Head head;
-    Head leftEye, rightEye;
-    Body body1;
+//    Head head;
+//    Head leftEye, rightEye;
+//    Body body1;
     
     
 private:
