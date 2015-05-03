@@ -10,9 +10,10 @@
 
 class Body{
 public:
+    
+    Body(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, int xPos, int yPos, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight, ofColor color);
+    
     void draw();
-//    int width;
-//    int height;
     int xPos;
     int yPos;
     int xPosLeft;
