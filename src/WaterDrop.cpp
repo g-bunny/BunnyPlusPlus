@@ -8,6 +8,19 @@
 
 #include "WaterDrop.h"
 //--------------------------------------------------------------
+WaterDrop::WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, float rotateAngle, ofColor bunnyColor)
+{
+    this->scaleX = scaleX;
+    this->scaleY = scaleY;
+    this->scaleZ = scaleZ;
+    this->transX = transX;
+    this->transY = transY;
+    this->transZ = transZ;
+    this->rotateAngle = rotateAngle;
+    this->bunnyPartColor = bunnyColor;
+    this->setup();
+}
+
 void WaterDrop::setup(){
     nCurveVertices = 8;
     curveVertices[0].x = 29;

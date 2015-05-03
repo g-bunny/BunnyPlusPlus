@@ -25,6 +25,8 @@ class WaterDrop {
 
 public:
     
+    WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, float rotateAngle, ofColor bunnyColor);
+    
     void setup();
     void update();
     void draw();

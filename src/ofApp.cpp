@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
+    
     frameHeight = 200;
     frameWidth = 200;
     halfH = frameHeight/2;
@@ -15,9 +15,13 @@ void ofApp::setup(){
     
     numOfFrames = 4;
     numOfColumns = 2;
-    
-    ear1.setup();
-    ear2.setup();
+
+    this->ear1 = new WaterDrop(0.8, 1, 1, 605, 300, 100, 180, ofColor(255, 0, 0));
+//    ear1.setup();
+//    ear2.setup();
+//    ear3.setup();
+//    leg2.setup();
+
     
 //    for (int i = 0; i < numOfFrames; i++){
 //        startFrame[i] = 0;
@@ -26,6 +30,8 @@ void ofApp::setup(){
 //    startFrame[1] = false;
 //    startFrame[2] = false;
 //    startFrame[3] = false;
+    transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
+
 }
 
 //--------------------------------------------------------------
@@ -46,16 +52,9 @@ void ofApp::draw(){
         frames[i].draw();
     }
     ofSetCircleResolution(30);
-//    ear1.scaleX = 0.8;
-//    ear1.scaleY = 1;
-//    ear1.scaleZ = 1;
-//    ear1.transX = 605;
-//    ear1.transY = 300;
-//    ear1.transZ = 100;
-//    ear1.rotateAngle = 180;
-//    ear1.bunnyPartColor = ofColor(255,0,00);
-//    ear1.draw();
-//    
+    
+    ear1->draw();
+    
 //    ear2.scaleX = 0.8;
 //    ear2.scaleY = 1;
 //    ear2.scaleZ = 1;
@@ -65,63 +64,63 @@ void ofApp::draw(){
 //    ear2.rotateAngle = 180;
 //    ear2.bunnyPartColor = ofColor(205,0,255);
 //    ear2.draw();
+    
+
+    
+    body1.transX = 520;
+    body1.transY = 85;
+    body1.transZ = 0;
+    body1.xPos = 90;
+    body1.yPos = 100;
+    body1.xPosLeft = 0;
+    body1.yPosLeft = 300;
+    body1.xPosRight = 190;
+    body1.yPosRight = 300;
+    body1.scaleX =1.3;
+    body1.scaleY =1.8;
+    body1.scaleZ =1;
+    body1.color = ofColor(100,100,100);
+    body1.draw();
+    
+    head.xPos = 640;
+    head.yPos = 310;
+    head.width = 200;
+    head.height = 200;
+    head.color = ofColor(0,0,255);
+    head.scaleZ = 1;
+    head.scaleX = 1;
+    head.scaleY = 1;
+    head.draw();
+    
+    leftEye.xPos = 605;
+    rightEye.xPos = 680;
+    leftEye.yPos = 328;
+    rightEye.yPos = 328;
+    leftEye.width = 10;
+    rightEye.width = 10;
+    leftEye.height = 10;
+    rightEye.height = 10;
+    leftEye.scaleY = 1;
+    leftEye.scaleX = 1;
+    leftEye.scaleZ = 1;
+    rightEye.scaleZ = 1;
+    rightEye.scaleY = 1;
+    rightEye.scaleX = 1;
+    leftEye.color = ofColor(0,0,0);
+    rightEye.color = ofColor(0,0,0);
+    rightEye.draw();
+    leftEye.draw();
 //    
+//    ear3.scaleX = 1;
+//    ear3.scaleY = 1;
+//    ear3.scaleZ = 1;
+//    ear3.transX = 695;
+//    ear3.transY = 300;
+//    ear3.transZ = 100;
+//    ear3.rotateAngle = 10;
+//    ear3.bunnyPartColor = ofColor(0,255,5);
+//    ear3.draw();
 //
-//    
-//    body1.transX = 520;
-//    body1.transY = 85;
-//    body1.transZ = 0;
-//    body1.xPos = 90;
-//    body1.yPos = 100;
-//    body1.xPosLeft = 0;
-//    body1.yPosLeft = 300;
-//    body1.xPosRight = 190;
-//    body1.yPosRight = 300;
-//    body1.scaleX =1.3;
-//    body1.scaleY =1.8;
-//    body1.scaleZ =1;
-//    body1.color = ofColor(100,100,100);
-//    body1.draw();
-//    
-//    head.xPos = 640;
-//    head.yPos = 310;
-//    head.width = 200;
-//    head.height = 200;
-//    head.color = ofColor(0,0,255);
-//    head.scaleZ = 1;
-//    head.scaleX = 1;
-//    head.scaleY = 1;
-//    head.draw();
-//    
-//    leftEye.xPos = 605;
-//    rightEye.xPos = 680;
-//    leftEye.yPos = 328;
-//    rightEye.yPos = 328;
-//    leftEye.width = 10;
-//    rightEye.width = 10;
-//    leftEye.height = 10;
-//    rightEye.height = 10;
-//    leftEye.scaleY = 1;
-//    leftEye.scaleX = 1;
-//    leftEye.scaleZ = 1;
-//    rightEye.scaleZ = 1;
-//    rightEye.scaleY = 1;
-//    rightEye.scaleX = 1;
-//    leftEye.color = ofColor(0,0,0);
-//    rightEye.color = ofColor(0,0,0);
-//    rightEye.draw();
-//    leftEye.draw();
-    
-    ear3.scaleX = 1;
-    ear3.scaleY = 1;
-    ear3.scaleZ = 1;
-    ear3.transX = 695;
-    ear3.transY = 300;
-    ear3.transZ = 100;
-    ear3.rotateAngle = 10;
-    ear3.bunnyPartColor = ofColor(0,255,5);
-    ear3.draw();
-    
 //    leg2.scaleX = 1;
 //    leg2.scaleY = 1;
 //    leg2.scaleZ = 1;
@@ -131,7 +130,7 @@ void ofApp::draw(){
 //    leg2.rotateAngle = 10;
 //    leg2.bunnyPartColor = ofColor(5,255,0);
 //    leg2.draw();
-}
+    }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

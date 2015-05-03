@@ -40,12 +40,12 @@ class ofApp : public ofBaseApp{
     int numOfRows;
     
     ofColor color;
-    WaterDrop ear1;
-    WaterDrop ear2;
-    WaterDrop ear3;
-    WaterDrop leg1;
-    WaterDrop leg2;
-    WaterDrop arm1, arm2;
+    WaterDrop *ear1;
+//    WaterDrop ear2;
+//    WaterDrop ear3;
+//    WaterDrop leg1;
+//    WaterDrop leg2;
+//    WaterDrop arm1, arm2;
     Head head;
     Head leftEye, rightEye;
     Body body1;
@@ -53,5 +53,5 @@ class ofApp : public ofBaseApp{
     
 private:
     ofxTransparentWindow transparent;
-    
+
 };
