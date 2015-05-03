@@ -9,7 +9,10 @@
 #include "ofMain.h"
 
 class Head{
-public:
+    public:
+    
+    Head(float scaleX, float scaleY, float scaleZ, int xPos, int yPos, int width, int height, ofColor color);
+    
     void draw();
     int width;
     int height;
