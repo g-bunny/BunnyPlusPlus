@@ -9,9 +9,7 @@ void ofApp::setup(){
     halfW = frameWidth/2;
     buffer = 30;
 
-    color.r = 176;
-    color.g = 183;
-    color.b = 255;
+
     
     numOfFrames = 4;
     numOfColumns = 2;
@@ -58,6 +56,29 @@ void ofApp::setup(){
     const float rightEyeScaleZ = identityScale;
     this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 680, 328, 10, 10, black);
     
+//    this->testFrame = new Frame(buffer, buffer, frameHeight, frameWidth,color);
+    
+//    Frame *frames = new Frame;
+//
+    const ofColor lavender = ofColor(176,183,255);
+    
+    for (int i = 0; i < numOfFrames; i++){
+        frames.resize(numOfFrames);
+        this->frames[i] = new Frame((i%numOfColumns+1)*buffer + (i%numOfColumns)*frameWidth,
+                             (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight,
+                             frameWidth, frameHeight, lavender);
+    }
+//    for (int i = 0; i < numOfFrames; i++){
+//        frames.resize(numOfFrames);
+//        frames[i].xPos = (i%numOfColumns+1)*buffer + (i%numOfColumns)*frameWidth;
+//        frames[i].yPos = (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight;
+//        frames[i].width = frameWidth;
+//        frames[i].height = frameHeight;
+//        frames[i].color = color;
+//        frames[i].draw();
+//    }
+
+    
     transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
 }
 
@@ -69,15 +90,6 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     transparent.update();
-    for (int i = 0; i < numOfFrames; i++){
-        frames.resize(numOfFrames);
-        frames[i].xPos = (i%numOfColumns+1)*buffer + (i%numOfColumns)*frameWidth;
-        frames[i].yPos = (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight;
-        frames[i].width = frameWidth;
-        frames[i].height = frameHeight;
-        frames[i].color = color;
-        frames[i].draw();
-    }
     ofSetCircleResolution(30);
     
     ear1->draw();
@@ -90,16 +102,21 @@ void ofApp::draw(){
     head->draw();
     leftEye->draw();
     rightEye->draw();
+    
+    
+//    testFrame->draw();
+    for (int i = 0;  i < numOfFrames; i++){
+        frames[i]->draw();
     }
-
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyPressed(int key){
+}
 
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key)
+{
 }
 
 //--------------------------------------------------------------
@@ -116,11 +133,11 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
 //    for (int i = 0; i < numOfFrames; i++){
 //        if (x > frames[i].xPos && x < frames[i].xPos + frameWidth && y > frames[i].yPos && y < frames[i].yPos + frameHeight){
-//            startFrame[i] = 1;
+//            frames[i].startClick = true;
 //        }
 //    }
-//    cout << x << endl;
-//        cout << startFrame[0] <<endl;
+////    cout << x << endl;
+//        cout << frames[0].startClick <<endl;
 }
 
 //--------------------------------------------------------------

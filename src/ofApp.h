@@ -27,9 +27,11 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    vector<int> startFrame;
-    vector<int> endFrame;
-    vector<Frame> frames;
+//    vector<int> startFrame;
+//    vector<int> endFrame;
+    vector <Frame*> frames;
+    
+    Frame *testFrame;
     int numOfFrames;
     int frameWidth;
     int halfW;
@@ -39,7 +41,7 @@ class ofApp : public ofBaseApp{
     int numOfColumns;
     int numOfRows;
     
-    ofColor color;
+//    ofColor color;
     WaterDrop *ear1;
     WaterDrop *ear2;
     WaterDrop *leg1;
