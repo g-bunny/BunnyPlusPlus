@@ -12,13 +12,13 @@
 
 class Frame{
 public:
-    Frame(int xPos, int yPos, int width, int height, ofColor frameColor);
+    Frame(int xPos, int yPos, int width, int height, ofColor frameColor, Boolean startClick, Boolean endClick);
     void setup();
     void draw();
     //    void mouseDragged(int x, int y, int button);
     //    void resize();
     int xPos, yPos, width, height;
-    ofColor color;
+    ofColor frameColor;
     ofVec3f top, topLeft, topRight;
     ofVec3f bot, botLeft, botRight;
     ofVec3f left;

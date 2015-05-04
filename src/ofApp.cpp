@@ -66,7 +66,7 @@ void ofApp::setup(){
         frames.resize(numOfFrames);
         this->frames[i] = new Frame((i%numOfColumns+1)*buffer + (i%numOfColumns)*frameWidth,
                              (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight,
-                             frameWidth, frameHeight, lavender);
+                             frameWidth, frameHeight, lavender,false, false);
     }
 //    for (int i = 0; i < numOfFrames; i++){
 //        frames.resize(numOfFrames);
@@ -89,8 +89,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofColor lavender = ofColor(176,183,255);
     transparent.update();
     ofSetCircleResolution(30);
+    
     
     ear1->draw();
     ear2->draw();
@@ -106,8 +108,11 @@ void ofApp::draw(){
     
 //    testFrame->draw();
     for (int i = 0;  i < numOfFrames; i++){
+        frames[i]->frameColor = lavender;
         frames[i]->draw();
     }
+    
+      cout << frames[0]->startClick <<endl;
 }
 
 //--------------------------------------------------------------
@@ -131,22 +136,23 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-//    for (int i = 0; i < numOfFrames; i++){
-//        if (x > frames[i].xPos && x < frames[i].xPos + frameWidth && y > frames[i].yPos && y < frames[i].yPos + frameHeight){
-//            frames[i].startClick = true;
-//        }
-//    }
-////    cout << x << endl;
-//        cout << frames[0].startClick <<endl;
+    for (int i = 0; i < numOfFrames; i++){
+        if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
+//            frames[i]->height = 10;
+            frames[i]->startClick = true;
+        }
+    }
+//    cout << x << endl;
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-//    for (int i = 0; i < numOfFrames; i++){
-//        if (x > frames[i].xPos && x < frames[i].xPos + frameWidth && y > frames[i].yPos && y < frames[i].yPos + frameHeight){
-//            endFrame[i] = true;
-//        }
-//    }
+    for (int i = 0; i < numOfFrames; i++){
+        if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
+            frames[i]->endClick = true;
+        }
+    }
 }
 
 //--------------------------------------------------------------
