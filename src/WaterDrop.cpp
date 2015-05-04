@@ -90,13 +90,13 @@ void WaterDrop::draw(){
 //    }
 //    ofDisableAlphaBlending();
     
-    cout << "1:" << curveVertices[0].x << "," << curveVertices[0].y << endl;
-    cout << "2:" << curveVertices[1].x << "," << curveVertices[1].y << endl;
-    cout << "3:" << curveVertices[2].x << "," << curveVertices[2].y << endl;
-    cout << "4:" << curveVertices[3].x << "," << curveVertices[3].y << endl;
-    cout << "5:" << curveVertices[4].x << "," << curveVertices[4].y << endl;
-    cout << "6:" << curveVertices[5].x << "," << curveVertices[5].y << endl;
-    cout << "7:" << curveVertices[6].x << "," << curveVertices[6].y << endl;
+//    cout << "1:" << curveVertices[0].x << "," << curveVertices[0].y << endl;
+//    cout << "2:" << curveVertices[1].x << "," << curveVertices[1].y << endl;
+//    cout << "3:" << curveVertices[2].x << "," << curveVertices[2].y << endl;
+//    cout << "4:" << curveVertices[3].x << "," << curveVertices[3].y << endl;
+//    cout << "5:" << curveVertices[4].x << "," << curveVertices[4].y << endl;
+//    cout << "6:" << curveVertices[5].x << "," << curveVertices[5].y << endl;
+//    cout << "7:" << curveVertices[6].x << "," << curveVertices[6].y << endl;
     
     ofPopMatrix();
 }
