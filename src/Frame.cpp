@@ -8,9 +8,18 @@
 
 #include "Frame.h"
 
-void Frame::draw(){
+Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor){
+    this->xPos = xPos;
+    this->yPos = yPos;
+    this->width = width;
+    this->height = height;
+    this->color = frameColor;
+    this->setup();
+}
+
+void Frame::setup(){
     ofSetColor(color);
-    ofRect(xPos,yPos,width,height);
+    
     
     //joints
     topLeft.set(xPos,yPos,0);
@@ -22,15 +31,21 @@ void Frame::draw(){
     left.set(xPos, yPos + height/2,0);
     right.set(xPos + width, yPos + height/2, 0);
     
+}
+
+void Frame::draw(){
+    
+    ofRect(xPos,yPos,width,height);
+    
     //testing joint positions
-    ofSetColor(0,0,0,50);
-    ofRect(topLeft, 4, 4);
-    ofRect(topRight,4,4);
-    ofRect(top,4,4);
-    ofRect(botLeft, 4, 4);
-    ofRect(botRight,4,4);
-    ofRect(bot,4,4);
-    ofRect(left, 4, 4);
-    ofRect(right,4,4);
+//    ofSetColor(0,0,0,50);
+//    ofRect(topLeft, 4, 4);
+//    ofRect(topRight,4,4);
+//    ofRect(top,4,4);
+//    ofRect(botLeft, 4, 4);
+//    ofRect(botRight,4,4);
+//    ofRect(bot,4,4);
+//    ofRect(left, 4, 4);
+//    ofRect(right,4,4);
     
 }

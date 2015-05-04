@@ -12,6 +12,8 @@
 
 class Frame{
 public:
+    Frame(int xPos, int yPos, int width, int height, ofColor frameColor);
+    void setup();
     void draw();
     //    void mouseDragged(int x, int y, int button);
     //    void resize();
@@ -21,4 +23,9 @@ public:
     ofVec3f bot, botLeft, botRight;
     ofVec3f left;
     ofVec3f right;
+    Boolean isClickStarted;
+    
+    Boolean startClick;
+    Boolean endClick;
+    
 };
