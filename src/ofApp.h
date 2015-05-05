@@ -9,6 +9,8 @@
 #include "WaterDrop.h"
 #include "Head.h"
 #include "Body.h"
+#include "CodeEditor.h"
+#include "Parser.h"
 
 class ofApp : public ofBaseApp{
 
@@ -52,6 +54,15 @@ class ofApp : public ofBaseApp{
     Head *head;
     Head *leftEye;
     Head *rightEye;
+    
+    CodeEditor *editor;
+    
+    Parser *parser;
+    
+    float areaOfTriangle;
+    float areaOfSubtriangle1;
+    float areaOfSubtriangle2;
+    float areaOfSubtriangle3;
     
 private:
     ofxTransparentWindow transparent;
