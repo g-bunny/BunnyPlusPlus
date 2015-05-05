@@ -6,9 +6,5 @@
 //
 //
 
-#ifndef __BunnyPlusPlus__ConnectionLines__
-#define __BunnyPlusPlus__ConnectionLines__
-
-#include <stdio.h>
-
-#endif /* defined(__BunnyPlusPlus__ConnectionLines__) */
+#include "ofMain.h"
+#include "Frame.h"
