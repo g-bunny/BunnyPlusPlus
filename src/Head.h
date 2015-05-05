@@ -11,7 +11,7 @@
 class Head{
     public:
     
-    Head(float scaleX, float scaleY, float scaleZ, int xPos, int yPos, int width, int height, ofColor color);
+    Head(float scaleX, float scaleY, float scaleZ, int xPos, int yPos, int width, int height, ofColor color, bool mouseOver);
     
     void draw();
     int width;
@@ -20,5 +20,7 @@ class Head{
     int yPos;
     float scaleX, scaleY, scaleZ;
     ofColor color;
+    ofColor mouseOverColor = ofColor(255,255,255,100);
+    bool mouseOver;
     
 };

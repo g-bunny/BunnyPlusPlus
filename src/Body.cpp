@@ -8,7 +8,7 @@
 
 #include "Body.h"
 
-Body::Body(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, int xPos, int yPos, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight, ofColor color){
+Body::Body(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, int xPos, int yPos, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight, ofColor color, bool mouseOver){
     
     this->scaleX = scaleX;
     this->scaleY = scaleY;
@@ -23,12 +23,14 @@ Body::Body(float scaleX, float scaleY, float scaleZ, int transX, int transY, int
     this->yPosLeft = yPosLeft;
     this->yPosRight = yPosRight;
     this->color = color;
+    this->mouseOver = mouseOver;
 }
 
 void Body::draw(){
     ofPushMatrix();
     ofTranslate(transX, transY,transZ);
     ofSetColor(color);
+    if (mouseOver == true) { ofSetColor(mouseOverColor);}
     ofScale(scaleX,scaleY,scaleZ);
     ofSetPolyMode(OF_POLY_WINDING_ODD);
     ofBeginShape();
@@ -37,4 +39,7 @@ void Body::draw(){
         ofVertex(xPosRight, yPosRight);
     ofEndShape();
     ofPopMatrix();
+    
+//    cout << xPos << "," << yPos << "..." << xPosLeft << "," << yPosLeft << "..." << xPosRight << "," << yPosLeft << endl;
+    
 }
