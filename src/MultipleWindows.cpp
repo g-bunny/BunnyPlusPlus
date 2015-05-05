@@ -12,7 +12,6 @@ MultipleWindows::MultipleWindows(){
 }
 
 void MultipleWindows::setup(const char *name, int xpos, int ypos, int width, int height, bool undecorated) {
-    transparent2.afterMainSetup(ofxTransparentWindow::NORMAL);
     this->width = width;
     this->height = height;
     //    transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
@@ -30,7 +29,10 @@ void MultipleWindows::setup(const char *name, int xpos, int ypos, int width, int
     glBlendEquation(GL_FUNC_ADD);
 #endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    transparent2.afterMainSetup(ofxTransparentWindow::NORMAL);
+
     glfwMakeContextCurrent(mainWindow);
+    
 }
 
 void MultipleWindows::begin(){
