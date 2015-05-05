@@ -33,7 +33,21 @@ void Parser::update(){
     }
 }
 
+void Parser::keyPressed(int key){
+    if(key == OF_KEY_DEL || key == OF_KEY_BACKSPACE){
+        typed = typed.substr(0 , typed.length()-1);
+    }
+    else if(key == OF_KEY_RETURN){
+        typed += "\n";
+    }
+}
+
 void Parser::keyReleased(int key){
-    pressed = (char)key;
+    if (key !=OF_KEY_DEL || key == OF_KEY_BACKSPACE){
+        pressed = (char)key;
+    }
     typed = typed + pressed;
+
+    
+
 }

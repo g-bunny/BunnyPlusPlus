@@ -13,6 +13,7 @@ public:
     Parser(string typed);
     void setup();
     void update();
+    void keyPressed(int key);
     void keyReleased(int key);
     string typed;
     vector<string> tokens;

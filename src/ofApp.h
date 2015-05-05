@@ -64,6 +64,9 @@ class ofApp : public ofBaseApp{
     float areaOfSubtriangle2;
     float areaOfSubtriangle3;
     
+    ofTrueTypeFont verdana;
+    
+    
 private:
     ofxTransparentWindow transparent;
 

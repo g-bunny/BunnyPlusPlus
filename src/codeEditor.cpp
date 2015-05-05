@@ -30,5 +30,6 @@ void CodeEditor::draw(){
     ofSetColor(100, 100, 100);
     ofRect(xPos + 10, yPos + 10, width - 20, 10);
     textAreaWidth = width - 20;
-    textStart = xPos - 10;
+    textStartX = xPos + 10;
+    textStartY = yPos + 35;
 }

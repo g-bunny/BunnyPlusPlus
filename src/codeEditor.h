@@ -18,7 +18,8 @@ public:
     int xPos, yPos, width, height;
     int textAreaWidth;
     int textAreaHeight;
-    int textStart;
+    int textStartX;
+    int textStartY;
     
 
 };

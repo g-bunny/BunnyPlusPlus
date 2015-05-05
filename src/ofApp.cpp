@@ -2,6 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    ofTrueTypeFont::setGlobalDpi(72);
+    verdana.loadFont("verdana.ttf", 14,true, true);
+    verdana.setLineHeight(18.0f);
+    verdana.setLetterSpacing(1.037);
+    
     frameHeight = 200;
     frameWidth = 200;
     halfH = frameHeight/2;
@@ -47,12 +53,12 @@ void ofApp::setup(){
     const float leftEyeScaleX = identityScale;
     const float leftEyeScaleY = identityScale;
     const float leftEyeScaleZ = identityScale;
-    this->leftEye = new Head(leftEyeScaleX, leftEyeScaleY, leftEyeScaleZ, 595, 328, 10, 10, black, false);
+    this->leftEye = new Head(leftEyeScaleX, leftEyeScaleY, leftEyeScaleZ, 590, 328, 10, 10, black, false);
     
     const float rightEyeScaleX = identityScale;
     const float rightEyeScaleY = identityScale;
     const float rightEyeScaleZ = identityScale;
-    this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 670, 328, 10, 10, black, false);
+    this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 665, 328, 10, 10, black, false);
     
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
@@ -115,10 +121,12 @@ void ofApp::draw(){
 //        ofVertex(0, 300);
 //        ofVertex(180, 300);
 //    ofEndShape();
+    verdana.drawString(parser->typed, editor->textStartX, editor->textStartY);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    parser->keyPressed(key);
 }
 
 //--------------------------------------------------------------
