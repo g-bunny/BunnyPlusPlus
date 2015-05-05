@@ -66,6 +66,9 @@ class ofApp : public ofBaseApp{
     
     ofTrueTypeFont verdana;
     
+    bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged;
+    
+    MultipleWindows secondWindow;
     
 private:
     ofxTransparentWindow transparent;

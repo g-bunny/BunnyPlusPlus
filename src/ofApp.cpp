@@ -8,6 +8,8 @@ void ofApp::setup(){
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
     
+    secondWindow.setup("second window", 10, 10, 300, 300, true);
+    
     frameHeight = 200;
     frameWidth = 200;
     halfH = frameHeight/2;
@@ -42,9 +44,7 @@ void ofApp::setup(){
     const float bodyScaleY = 1.0f;
     const float bodyScaleZ = identityScale;
     this->body1 = new Body(bodyScaleX, bodyScaleY, bodyScaleZ, 0, 0, 0,620, 250, 500, 600, 750, 600, ofColor(200,100,100), false);
-    
-//    cout << body1->xPos << endl;
-    
+
     const float headScaleX = identityScale;
     const float headScaleY = identityScale;
     const float headScaleZ = identityScale;
@@ -53,12 +53,12 @@ void ofApp::setup(){
     const float leftEyeScaleX = identityScale;
     const float leftEyeScaleY = identityScale;
     const float leftEyeScaleZ = identityScale;
-    this->leftEye = new Head(leftEyeScaleX, leftEyeScaleY, leftEyeScaleZ, 590, 328, 10, 10, black, false);
+    this->leftEye = new Head(leftEyeScaleX, leftEyeScaleY, leftEyeScaleZ, 586, 328, 12, 12, black, false);
     
     const float rightEyeScaleX = identityScale;
     const float rightEyeScaleY = identityScale;
     const float rightEyeScaleZ = identityScale;
-    this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 665, 328, 10, 10, black, false);
+    this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 12, 12, black, false);
     
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
@@ -69,10 +69,7 @@ void ofApp::setup(){
     }
     
     this->editor = new CodeEditor(800,50,505,700);
-//    xPos = 800;
-//    yPos = 50;
-//    width = 495;
-//    height = 800;
+//    xPos, yPos, width, height
     
     this->parser = new Parser("");
     
@@ -87,14 +84,23 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    if(parser->renderWindow == true){
+
+        secondWindow.begin();
+//        ofBackground(255, 255, 255, 30);
+        ofSetColor(255);
+        ofEllipse(20, 20, 20, 20);
+        transparent.update();
+        secondWindow.end();
+    }
+    
     ofColor lavender = ofColor(176,183,255);
     transparent.update();
     ofSetCircleResolution(30);
     
-    
+    //to be used to calculate area of body
     areaOfTriangle = (ABS(body1->xPosRight*(body1->yPos - body1->yPosLeft) + body1->xPos *(body1->yPosLeft - body1->yPosRight) + body1->xPosLeft*(body1->xPosRight - body1->yPos))/2);
-    
-   
     
     ear1->draw();
     ear2->draw();
@@ -108,7 +114,6 @@ void ofApp::draw(){
     rightEye->draw();
     editor->draw();
     
-//    testFrame->draw();
     for (int i = 0;  i < numOfFrames; i++){
         frames[i]->frameColor = lavender;
         frames[i]->draw();
@@ -137,20 +142,33 @@ void ofApp::keyReleased(int key)
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-//    checking if in circle
     
-    if(ofDist(head->xPos, head->yPos, x, y) <= head->width/2){
-//    if ((head->xPos -x)^2 + (head->yPos - y)^2 == (head->width)^2){
-        head->mouseOver = true;
+    //checking if in circle / left eye
+    if(ofDist(leftEye->xPos, leftEye->yPos, x, y) <= leftEye->width/2){
+        leftEye->mouseOver = true;
+    }else{
+        leftEye->mouseOver = false;
     }
-    else{
+    //checking if in circle / right eye
+    if(ofDist(rightEye->xPos, rightEye->yPos, x, y) <= rightEye->width/2){
+        rightEye->mouseOver = true;
+    }else{
+        rightEye->mouseOver = false;
+    }
+    //checking if in circle / head
+    if(ofDist(head->xPos, head->yPos, x, y) <= head->width/2 && leftEye->mouseOver != true && rightEye->mouseOver != true){
+        head->mouseOver = true;
+    }else{
         head->mouseOver = false;
     }
+    
+    //checking if in triangle / body
+    
     areaOfSubtriangle1 = ABS(x*(body1->yPos - body1->yPosLeft) + body1->xPos *(body1->yPosLeft - y) + body1->xPosLeft*(y - body1->yPos))/2;
     areaOfSubtriangle2 = ABS(x*(body1->yPos - body1->yPosRight) + body1->xPos *(body1->yPosRight - y) + body1->xPosRight*(y - body1->yPos))/2;
     areaOfSubtriangle3 = ABS(x*(body1->yPosRight - body1->yPosLeft) + body1->xPosRight *(body1->yPosLeft - y) + body1->xPosLeft*(y - body1->yPosRight))/2;
     
-    if (areaOfSubtriangle1 + areaOfSubtriangle2 + areaOfSubtriangle3 == areaOfTriangle + 75* body1->xPosLeft){
+    if (areaOfSubtriangle1 + areaOfSubtriangle2 + areaOfSubtriangle3 == areaOfTriangle + 75* body1->xPosLeft && head->mouseOver != true){
         body1->mouseOver = true;
     }
     else {
@@ -168,14 +186,28 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
     
-    if(ofDist(head->xPos, head->yPos, x, y) <= head->width/2){
+    if(head->mouseOver == true){
         head->xPos = x;
         head->yPos = y;
+        headBeingDragged = true;
+    }
+    if(leftEye->mouseOver == true){
+        leftEye->xPos = x;
+        leftEye->yPos = y;
+        leftEyeBeingDragged = true;
+    }
+    if(rightEye->mouseOver == true){
+        rightEye->xPos = x;
+        rightEye->yPos = y;
+        rightEyeBeingDragged = true;
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    headBeingDragged = false;
+    leftEyeBeingDragged = false;
+    rightEyeBeingDragged = false;
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
 //            frames[i]->height = 10;
@@ -185,9 +217,17 @@ void ofApp::mousePressed(int x, int y, int button){
     cout << x << "," << y <<endl;
     
     
-    if(ofDist(head->xPos, head->yPos, x, y) <= head->width/2){
+    if(head->mouseOver == true){
         head->xPos = x;
         head->yPos = y;
+    }
+    if(leftEye->mouseOver == true){
+        leftEye->xPos = x;
+        leftEye->yPos = y;
+    }
+    if(rightEye->mouseOver == true){
+        rightEye->xPos = x;
+        rightEye->yPos = y;
     }
 }
 
@@ -200,6 +240,20 @@ void ofApp::mouseReleased(int x, int y, int button){
     }
     head->xPos = 620;
     head->yPos = 305;
+    leftEye->xPos = 586;
+    leftEye->yPos = 328;
+    rightEye->xPos = 661;
+    rightEye->yPos = 328;
+    
+    if (headBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        parser->typed = parser->typed + " head ";
+    }
+    if (leftEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        parser->typed = parser->typed + " eye ";
+    }
+    if (rightEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        parser->typed = parser->typed + " eye ";
+    }
 }
 
 //--------------------------------------------------------------
