@@ -8,7 +8,7 @@
 
 #include "WaterDrop.h"
 //--------------------------------------------------------------
-WaterDrop::WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, float rotateAngle, ofColor bunnyColor)
+WaterDrop::WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, float rotateAngle, ofColor bunnyColor, bool mouseOver)
 {
     this->scaleX = scaleX;
     this->scaleY = scaleY;
@@ -18,6 +18,7 @@ WaterDrop::WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int t
     this->transZ = transZ;
     this->rotateAngle = rotateAngle;
     this->bunnyPartColor = bunnyColor;
+    this->mouseOver = mouseOver;
     this->setup();
 }
 
@@ -54,6 +55,7 @@ void WaterDrop::draw(){
     ofRotateZ(rotateAngle);
     ofScale(scaleX,scaleY,scaleZ);
     ofSetColor(bunnyPartColor);
+    if (mouseOver == true) { ofSetColor(mouseOverColor);}
     ofBeginShape();
     
     for (int i = 0; i < nCurveVertices; i++){

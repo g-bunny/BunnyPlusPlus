@@ -25,7 +25,7 @@ class WaterDrop {
 
 public:
     
-    WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, float rotateAngle, ofColor bunnyColor);
+    WaterDrop(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, float rotateAngle, ofColor bunnyColor, bool mouseOver);
     
     void setup();
     void update();
@@ -45,7 +45,10 @@ public:
     int transX, transY, transZ;
     float rotateAngle;
     float scaleX, scaleY, scaleZ;
+    bool mouseOver;
+    
     ofColor bunnyPartColor;
+    ofColor mouseOverColor = ofColor(255,255,255,100);
     draggableVertex curveVertices[7];
     draggableVertex bezierVertices[4];
 };
