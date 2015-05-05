@@ -8,7 +8,7 @@
 
 #include "Frame.h"
 
-Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, Boolean startClick, Boolean endClick){
+Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool startClick, bool endClick){
     this->xPos = xPos;
     this->yPos = yPos;
     this->width = width;
@@ -62,7 +62,7 @@ void Frame::draw(){
     }
     
     
-    cout << startClick <<endl;
-    cout << false <<endl;
+//    cout << startClick <<endl;
+//    cout << endClick <<endl;
     
 }

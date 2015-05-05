@@ -12,7 +12,7 @@
 
 class Frame{
 public:
-    Frame(int xPos, int yPos, int width, int height, ofColor frameColor, Boolean startClick, Boolean endClick);
+    Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool startClick, bool endClick);
     void setup();
     void draw();
     //    void mouseDragged(int x, int y, int button);
@@ -23,9 +23,9 @@ public:
     ofVec3f bot, botLeft, botRight;
     ofVec3f left;
     ofVec3f right;
-    Boolean isClickStarted;
+    bool isClickStarted;
     
-    Boolean startClick;
-    Boolean endClick;
+    bool startClick;
+    bool endClick;
     
 };
