@@ -22,12 +22,14 @@ void Parser::setup(){
 }
 
 void Parser::update(){
-    cout<<typed<<endl;
+//    cout<<typed<<endl;
     tokens = ofSplitString(typed, " ");
     if (typed == ""){
-        cout << "Im empty" << endl;
+//        cout << "Im empty" << endl;
     }
-    cout << "Im a token!" << tokens[0] << endl;
+
+    for (string n : tokens) cout << n << ' ';
+    
     if (tokens[0] =="run"){
         renderWindow = true;
     }

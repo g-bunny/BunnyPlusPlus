@@ -127,6 +127,19 @@ void ofApp::draw(){
 //        ofVertex(180, 300);
 //    ofEndShape();
     verdana.drawString(parser->typed, editor->textStartX, editor->textStartY);
+
+//    for_each(
+//             parser->tokens.begin(),
+//             parser->tokens.end(),
+//             [] (const string t) {cout << c << endl;}
+//             
+//    );
+    
+//    for (int i = parser->typed.begin(); i != parser->typed.end(); i++){
+//        cout << parser->typed[i]<< endl;
+//        
+//    }
+    
 }
 
 //--------------------------------------------------------------
@@ -230,7 +243,6 @@ void ofApp::mousePressed(int x, int y, int button){
         rightEye->yPos = y;
     }
 }
-
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     for (int i = 0; i < numOfFrames; i++){
@@ -255,17 +267,14 @@ void ofApp::mouseReleased(int x, int y, int button){
         parser->typed = parser->typed + " eye ";
     }
 }
-
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 
 }
-
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
 
 }
-
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
