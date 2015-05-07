@@ -23,7 +23,7 @@ public:
     ofVec3f bot, botLeft, botRight;
     ofVec3f left;
     ofVec3f right;
-    bool isClickStarted;
+    bool currentFrame;
     
     bool startClick;
     bool endClick;

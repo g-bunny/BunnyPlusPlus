@@ -61,6 +61,9 @@ void Frame::draw(){
         ofRect(xPos,yPos,width,height);
     }
     
+    if (startClick == true && endClick == true){
+        currentFrame = true;
+    }
     
 //    cout << startClick <<endl;
 //    cout << endClick <<endl;

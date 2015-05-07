@@ -241,6 +241,9 @@ void ofApp::mousePressed(int x, int y, int button){
 //            frames[i]->height = 10;
             frames[i]->startClick = true;
         }
+        else {
+            frames[i]->startClick = false;
+        }
     }
     cout << x << "," << y <<endl;
     
@@ -263,6 +266,9 @@ void ofApp::mouseReleased(int x, int y, int button){
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
             frames[i]->endClick = true;
+        }
+        else {
+            frames[i]->endClick = false;
         }
     }
     head->xPos = 620;
