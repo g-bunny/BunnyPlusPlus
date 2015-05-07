@@ -15,7 +15,7 @@
 class MultipleWindows {
     
 public:
-    MultipleWindows();
+    MultipleWindows(int width, int height);
     void setup(const char *name, int xpos, int ypos, int width, int height, bool undecorated);
     void begin();
     void end();
