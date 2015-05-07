@@ -67,6 +67,7 @@ class ofApp : public ofBaseApp{
     ofTrueTypeFont verdana;
     
     bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged;
+    bool secondWindowRendered;
     
     MultipleWindows secondWindow;
     

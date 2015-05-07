@@ -8,7 +8,7 @@ void ofApp::setup(){
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
     
-    secondWindow.setup("second window", 10, 10, 300, 300, true);
+//    secondWindow.setup("second window", 10, 10, 300, 300, false);
     
     frameHeight = 200;
     frameWidth = 200;
@@ -58,7 +58,7 @@ void ofApp::setup(){
     const float rightEyeScaleX = identityScale;
     const float rightEyeScaleY = identityScale;
     const float rightEyeScaleZ = identityScale;
-    this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 12, 12, black, false);
+    this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 10, 10, black, false);
     
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
@@ -84,16 +84,27 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
-    if(parser->renderWindow == true){
 
-        secondWindow.begin();
-//        ofBackground(255, 255, 255, 30);
-        ofSetColor(255);
-        ofEllipse(20, 20, 20, 20);
-        transparent.update();
-        secondWindow.end();
+    if(parser->renderWindow == false) {
+        secondWindow.hide();
+
     }
+    
+    if(parser->renderWindow == true && secondWindowRendered == false){
+        secondWindow.setup("second window", 10, 10, 300, 300, false);
+        secondWindowRendered = true;
+    }
+    
+    
+//    if(parser->renderWindow == true){
+//
+//        secondWindow.begin();
+////        ofBackground(255, 255, 255, 30);
+////        ofSetColor(255);
+////        ofEllipse(20, 20, 20, 20);
+//        transparent.update();
+//        secondWindow.end();
+//    }
     
     ofColor lavender = ofColor(176,183,255);
     transparent.update();
@@ -126,19 +137,13 @@ void ofApp::draw(){
 //        ofVertex(0, 300);
 //        ofVertex(180, 300);
 //    ofEndShape();
-    verdana.drawString(parser->typed, editor->textStartX, editor->textStartY);
 
-//    for_each(
-//             parser->tokens.begin(),
-//             parser->tokens.end(),
-//             [] (const string t) {cout << c << endl;}
-//             
-//    );
-    
-//    for (int i = parser->typed.begin(); i != parser->typed.end(); i++){
-//        cout << parser->typed[i]<< endl;
+    verdana.drawString(parser->typed, editor->textStartX, editor->textStartY);
+//    if (float stringWidth(parser->typed)){
 //        
 //    }
+    
+    cout << parser->stringWidth(parser->typed) <<endl;
     
 }
 
@@ -188,9 +193,9 @@ void ofApp::mouseMoved(int x, int y ){
         body1->mouseOver = false;
     }
 
-    cout<<areaOfTriangle<<endl;
-    cout<<areaOfSubtriangle1 << "+" << areaOfSubtriangle2 << "+" << areaOfSubtriangle3 << endl;
-    cout<<areaOfSubtriangle3 + areaOfSubtriangle2 + areaOfSubtriangle1 << endl;
+//    cout<<areaOfTriangle<<endl;
+//    cout<<areaOfSubtriangle1 << "+" << areaOfSubtriangle2 << "+" << areaOfSubtriangle3 << endl;
+//    cout<<areaOfSubtriangle3 + areaOfSubtriangle2 + areaOfSubtriangle1 << endl;
     
 //    cout<<body1->mouseOver<<endl;
 //    cout<<head->mouseOver<<endl;
