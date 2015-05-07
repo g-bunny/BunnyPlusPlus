@@ -69,7 +69,7 @@ class ofApp : public ofBaseApp{
     bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged;
     bool secondWindowRendered;
     
-    MultipleWindows secondWindow;
+    MultipleWindows *secondWindow;
     
 private:
     ofxTransparentWindow transparent;

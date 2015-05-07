@@ -85,13 +85,23 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    if(parser->renderWindow == false) {
-        secondWindow.hide();
+    if(parser->renderWindowHideWindow == true) {
+        parser->renderWindowWithCode = false;
+        secondWindow->hide();
 
     }
     
+    if(parser->renderWindowWithCode == true) {
+        secondWindow->begin();
+        ofSetColor(255);
+        ofEllipse(20, 20, 20, 20);
+        secondWindow->end();
+        cout << parser->renderWindowWithCode << endl;
+    }
+    
     if(parser->renderWindow == true && secondWindowRendered == false){
-        secondWindow.setup("second window", 10, 10, 300, 300, false);
+        this->secondWindow = new MultipleWindows(300, 300);
+        secondWindow->setup("second window", 10, 10, 300, 300, false);
         secondWindowRendered = true;
     }
     

@@ -15,11 +15,12 @@ public:
     void update();
     void keyPressed(int key);
     void keyReleased(int key);
+    float stringWidth(string typed);
     string typed;
     vector<string> tokens;
     string pressed = "";
     int tokenLength;
     bool empty;
-    bool renderWindow;
+    bool renderWindow, renderWindowWithCode, renderWindowHideWindow;
 //    ofTrueTypeFont myFont;
 };
