@@ -10,7 +10,7 @@
 #include "Head.h"
 #include "Body.h"
 #include "CodeEditor.h"
-#include "Parser.h"
+//#include "Parser.h"
 
 class ofApp : public ofBaseApp{
 
@@ -73,6 +73,9 @@ class ofApp : public ofBaseApp{
     
     int currentFrameState;
     int tempVariable;
+    
+    //state: frames = 1; body parts = 2; editor = 3; general environment = 4
+    int whatObjectIsClicked;
 private:
     ofxTransparentWindow transparent;
 

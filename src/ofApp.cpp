@@ -66,8 +66,6 @@ void ofApp::setup(){
                              (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight,
                              frameWidth, frameHeight, lavender,false, false, editor->textStartX, editor->textStartY);
     }
-    
-
 //    xPos, yPos, width, height
 //    for (int i = 0; i < numOfFrames; i++){
 //        parser.resize(numOfFrames);
@@ -77,7 +75,6 @@ void ofApp::setup(){
 //    for (int i = 0; i < numOfFrames; i++){
 //        parser->typed.resize(numOfFrames);
 //    }
-    
     transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
 }
 
@@ -95,45 +92,6 @@ void ofApp::update(){
 //            currentFrameState = i;
 //        }
 //    }
-    if(frames[0]->currentFrame == true){
-        frames[1]->currentFrame = false;
-        frames[2]->currentFrame = false;
-        frames[3]->currentFrame = false;
-        currentFrameState = 0;
-        
-    }
-    if(frames[1]->currentFrame == true){
-        frames[0]->currentFrame = false;
-        frames[2]->currentFrame = false;
-        frames[3]->currentFrame = false;
-        currentFrameState = 1;
-    }
-    if(frames[2]->currentFrame == true){
-        frames[1]->currentFrame = false;
-        frames[0]->currentFrame = false;
-        frames[3]->currentFrame = false;
-        currentFrameState = 2;
-    }
-    if(frames[3]->currentFrame == true){
-        currentFrameState = 3;
-        frames[1]->currentFrame = false;
-        frames[2]->currentFrame = false;
-        frames[0]->currentFrame = false;
-    }
-    
-    if(currentFrameState == 0){
-        tempVariable = 0;
-        frames[0]->endClick = false;
-    } else if (currentFrameState == 1){
-        tempVariable = 1;
-        frames[1]->endClick = false;
-    } else if (currentFrameState == 2){
-        tempVariable = 2;
-        frames[2]->endClick = false;
-    } else if (currentFrameState == 3){
-        tempVariable = 3;
-        frames[3]->endClick = false;
-    }
 }
 
 //--------------------------------------------------------------
@@ -161,7 +119,6 @@ void ofApp::draw(){
     
     
 //    if(parser->renderWindow == true){
-//
 //        secondWindow.begin();
 ////        ofBackground(255, 255, 255, 30);
 ////        ofSetColor(255);
@@ -223,7 +180,7 @@ void ofApp::draw(){
 //    cout<<"currentFrameState is " <<tempVariable<<endl;
 //    
     for (int i = 0; i < numOfFrames; i++){
-        if (frames[i]->startClick == true ){
+        if (frames[i]->endClick == true){
             frames[i]->frameIsCurrent();
             cout<<i<<endl;
             
@@ -233,15 +190,7 @@ void ofApp::draw(){
 //            frames[i]->endClicked = true;
 //        }
 //    }
-//    cout << "is frame 0 current?" << frames[0]->currentFrame << endl;
-//    cout << "is frame 1 current?" << frames[1]->currentFrame << endl;
-//    cout << "is frame 2 current?" << frames[2]->currentFrame << endl;
-//    cout << "is frame 3 current?" << frames[3]->currentFrame << endl;
-//    cout << "is frame 4 current?" << frames[4]->currentFrame << endl;
-//    cout << "is frame 5 current?" << frames[5]->currentFrame << endl;
-//    cout << "is frame 6 current?" << frames[6]->currentFrame << endl;
-//    cout << "is frame 7 current?" << frames[7]->currentFrame << endl;
-//    cout << "is frame 8 current?" << frames[8]->currentFrame << endl;
+
     
     cout<< "frame 0 string: " << frames[0]->typed->typedInput << endl;
     cout<< "frame 1 string: " << frames[1]->typed->typedInput << endl;
@@ -340,7 +289,7 @@ void ofApp::mousePressed(int x, int y, int button){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
 //            frames[i]->height = 10;
             frames[i]->startClick = true;
-            
+            whatObjectIsClicked = 1;
         }
         if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
             //            frames[i]->height = 10;
@@ -375,15 +324,14 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
+            whatObjectIsClicked = 1;
             frames[i]->endClick = true;
         }
         if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
             //            frames[i]->height = 10;
             frames[i]->endClick = false;
-            
         }
     }
-    
 //    for (int i = 0; i < numOfFrames; i++){
 //        frames[i]->mouseReleased(x, y, button);
 //    }
