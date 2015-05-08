@@ -7,18 +7,16 @@
 //
 
 #include "ofMain.h"
+//#include "Typed.h"
 
 class Parser{
 public:
-    Parser(string typed);
+    Parser();
     void setup();
     void update();
-    void keyPressed(int key);
-    void keyReleased(int key);
-    float stringWidth(string typed);
-    string typed;
+//    vector<Typed*> typed;
     vector<string> tokens;
-    string pressed = "";
+    string toBeParsed;
     int tokenLength;
     bool empty;
     bool renderWindow, renderWindowWithCode, renderWindowHideWindow;

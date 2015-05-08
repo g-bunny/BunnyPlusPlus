@@ -8,25 +8,23 @@
 
 #include "Parser.h"
 
-Parser::Parser(string typed){
-    this->typed = typed;
-    this->tokens = tokens;
-    this->pressed = pressed;
-    this->setup();
-    this->update();
-}
-
-void Parser::setup(){
-    typed = "";
+Parser::Parser(){
     
 }
 
+//Parser::Parser(int numOfStrings){
+//    this->tokens = tokens;
+//    this->pressed = pressed;
+//    this->setup();
+//    this->update();
+//    this->numOfStrings = numOfStrings;
+//}
+
+void Parser::setup(){
+}
+
 void Parser::update(){
-//    cout<<typed<<endl;
-    tokens = ofSplitString(typed, " ");
-    if (typed == ""){
-//        cout << "Im empty" << endl;
-    }
+    tokens = ofSplitString(toBeParsed, " ");
     for (string n : tokens) cout << n << ' ';
     for (int i=0; i < tokens.size(); i++){
         if (tokens[i] =="run"){
@@ -43,28 +41,12 @@ void Parser::update(){
         }
     }
     
-    cout << "token size is" <<tokens.size()<<endl;
-    cout << "token 0 is " << tokens[0] << endl;
+//    cout << "token size is" <<tokens.size()<<endl;
+//    cout << "token 0 is " << tokens[0] << endl;
 //    cout << "token 1 is" << tokens[1] << endl;
 //    cout << "token 2 is" << tokens[2] << endl;
 }
 
-void Parser::keyPressed(int key){
-    if(key == OF_KEY_DEL || key == OF_KEY_BACKSPACE){
-        typed = typed.substr(0 , typed.length()-1);
-    }
-    else if(key == OF_KEY_RETURN){
-        typed += "\n";
-    }
-}
-
-void Parser::keyReleased(int key){
-    if (key !=OF_KEY_DEL || key == OF_KEY_BACKSPACE){
-        pressed = (char)key;
-    }
-    typed = typed + pressed;
-}
-
-float Parser::stringWidth(string s){
-//    cout << stringWidth(typed) <<endl;
-}
+//float Parser::stringWidth(string s){
+////    cout << stringWidth(typed) <<endl;
+//}
