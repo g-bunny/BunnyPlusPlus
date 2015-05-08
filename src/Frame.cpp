@@ -114,12 +114,16 @@ void Frame::frameIsCurrent(){
 }
 
 void Frame::keyPressed(int key){
-    if (pressedKey == true){
-        typed->keyPressed(key);
+    if(startClick == true){
+        if (pressedKey == true){
+            typed->keyPressed(key);
+        }
     }
 }
 void Frame::keyReleased(int key){
-    if (pressedKey == true){
-        typed->keyReleased(key);
+    if(startClick == true){
+        if (pressedKey == true){
+            typed->keyReleased(key);
+        }
     }
 }
