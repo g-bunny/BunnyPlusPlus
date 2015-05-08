@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "Typed.h"
+#include "Parser.h"
+#include "Button.h"
 
 class Frame{
 public:
@@ -36,5 +38,10 @@ public:
     bool pressedKey;
     bool releasedKey;
     Typed * typed;
+    Parser * parser;
     ofTrueTypeFont verdana;
+    
+    Button * plusButton;
+    Button * minusButton;
+    
 };

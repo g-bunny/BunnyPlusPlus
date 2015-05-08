@@ -20,6 +20,7 @@ Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool
     this->setup();
     this->xPosText = xPosText;
     this->yPosText = yPosText;
+    
 }
 
 void Frame::setup(){
@@ -44,6 +45,7 @@ void Frame::setup(){
     right.set(xPos + width, yPos + height/2, 0);
     startClick = false;
     endClick = false;
+    this->plusButton = new Button(1);
 }
 
 void Frame::draw(){
@@ -78,7 +80,6 @@ void Frame::draw(){
     
     if (currentFrame == true){
     }
-    
     cout << startClick <<endl;
     cout << endClick <<endl;
 //    if (startClick == true && endClick == true && isAFrame == true){
@@ -92,9 +93,7 @@ void Frame::draw(){
 //        ofRect(xPos + 10, yPos + 10, width, height);
 //        currentFrame = true;
 //    }
-    
 //}
-
 //void Frame::mousePressed(int x, int y, int button){
 //    startClick = true;
 //    cout<<"HI"<<endl;
@@ -109,8 +108,21 @@ void Frame::frameIsCurrent(){
     ofNoFill();
     ofEllipse(xPos+width/2, yPos+width/2, width/4, height/4);
     ofFill();
+    plusButton->xPos = xPos + width * 5/6;
+    plusButton->yPos = yPos + width / 6;
+    plusButton->width = 10;
+    plusButton->height = 10;
+    plusButton->drawPlus();
     pressedKey = true;
     verdana.drawString(typed->typedInput, xPosText, yPosText);
+    this->parser = new Parser(typed->typedInput);
+    parser->update();
+    cout << "token size is" << parser->tokens.size()<<endl;
+    if (parser->tokens.size() > 3){
+        cout << "token 0 is " << parser->tokens[0] << endl;
+        cout << "token 1 is " << parser->tokens[1] << endl;
+        cout << "token 2 is " << parser->tokens[2] << endl;
+    }
 }
 
 void Frame::keyPressed(int key){
