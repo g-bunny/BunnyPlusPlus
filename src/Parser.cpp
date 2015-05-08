@@ -8,8 +8,8 @@
 
 #include "Parser.h"
 
-Parser::Parser(){
-    
+Parser::Parser(string toBeParsed){
+    this->toBeParsed = toBeParsed;
 }
 
 //Parser::Parser(int numOfStrings){
@@ -19,9 +19,6 @@ Parser::Parser(){
 //    this->update();
 //    this->numOfStrings = numOfStrings;
 //}
-
-void Parser::setup(){
-}
 
 void Parser::update(){
     tokens = ofSplitString(toBeParsed, " ");
@@ -40,13 +37,7 @@ void Parser::update(){
             renderWindowWithCode = false;
         }
     }
-    
-//    cout << "token size is" <<tokens.size()<<endl;
-//    cout << "token 0 is " << tokens[0] << endl;
-//    cout << "token 1 is" << tokens[1] << endl;
-//    cout << "token 2 is" << tokens[2] << endl;
 }
-
 //float Parser::stringWidth(string s){
 ////    cout << stringWidth(typed) <<endl;
 //}

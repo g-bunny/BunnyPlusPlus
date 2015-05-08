@@ -11,7 +11,7 @@
 
 class Parser{
 public:
-    Parser();
+    Parser(string toBeParsed);
     void setup();
     void update();
 //    vector<Typed*> typed;
