@@ -57,8 +57,8 @@ class ofApp : public ofBaseApp{
     
     CodeEditor *editor;
     
-    Parser *parser;
-    
+    Parser * parser;
+    vector <string> currentString;
     float areaOfTriangle;
     float areaOfSubtriangle1;
     float areaOfSubtriangle2;
@@ -71,6 +71,8 @@ class ofApp : public ofBaseApp{
     
     MultipleWindows *secondWindow;
     
+    int currentFrameState;
+    int tempVariable;
 private:
     ofxTransparentWindow transparent;
 

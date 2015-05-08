@@ -8,15 +8,13 @@ void ofApp::setup(){
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
     
-//    secondWindow.setup("second window", 10, 10, 300, 300, false);
-    
-    frameHeight = 200;
-    frameWidth = 200;
+    frameHeight = 90;
+    frameWidth = 90;
     halfH = frameHeight/2;
     halfW = frameWidth/2;
-    buffer = 30;
-    numOfFrames = 4;
-    numOfColumns = 2;
+    buffer = 20;
+    numOfFrames = 9;
+    numOfColumns = 3;
     const float identityScale = 1.0f;
     const ofColor black = ofColor(0, 0, 0);
     const ofColor red = ofColor(255, 0, 0);
@@ -53,25 +51,32 @@ void ofApp::setup(){
     const float leftEyeScaleX = identityScale;
     const float leftEyeScaleY = identityScale;
     const float leftEyeScaleZ = identityScale;
-    this->leftEye = new Head(leftEyeScaleX, leftEyeScaleY, leftEyeScaleZ, 586, 328, 12, 12, black, false);
+    this->leftEye = new Head(leftEyeScaleX, leftEyeScaleY, leftEyeScaleZ, 586, 328, 10, 10, black, false);
     
     const float rightEyeScaleX = identityScale;
     const float rightEyeScaleY = identityScale;
     const float rightEyeScaleZ = identityScale;
     this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 10, 10, black, false);
+    this->editor = new CodeEditor(800,50,505,700);
     
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
         frames.resize(numOfFrames);
         this->frames[i] = new Frame((i%numOfColumns+1)*buffer + (i%numOfColumns)*frameWidth,
                              (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight,
-                             frameWidth, frameHeight, lavender,false, false);
+                             frameWidth, frameHeight, lavender,false, false, editor->textStartX, editor->textStartY);
     }
     
-    this->editor = new CodeEditor(800,50,505,700);
+
 //    xPos, yPos, width, height
-    
-    this->parser = new Parser("");
+//    for (int i = 0; i < numOfFrames; i++){
+//        parser.resize(numOfFrames);
+//        this->parser[i] = new Parser("");
+//    }
+//    this->parser = new Parser(currentFrameState);
+//    for (int i = 0; i < numOfFrames; i++){
+//        parser->typed.resize(numOfFrames);
+//    }
     
     transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
 }
@@ -79,31 +84,80 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     transparent.update();
-    parser->update();
+//    parser->update();
+//    for (int i = 0; i < numOfFrames; i ++){
+//        if (frames[i]->currentFrame == true){
+//            currentFrameState = i;
+//        }
+//    }
+//    for (int i = numOfFrames - 1; i > -1; i --){
+//        if (frames[i]->currentFrame == true){
+//            currentFrameState = i;
+//        }
+//    }
+    if(frames[0]->currentFrame == true){
+        frames[1]->currentFrame = false;
+        frames[2]->currentFrame = false;
+        frames[3]->currentFrame = false;
+        currentFrameState = 0;
+        
+    }
+    if(frames[1]->currentFrame == true){
+        frames[0]->currentFrame = false;
+        frames[2]->currentFrame = false;
+        frames[3]->currentFrame = false;
+        currentFrameState = 1;
+    }
+    if(frames[2]->currentFrame == true){
+        frames[1]->currentFrame = false;
+        frames[0]->currentFrame = false;
+        frames[3]->currentFrame = false;
+        currentFrameState = 2;
+    }
+    if(frames[3]->currentFrame == true){
+        currentFrameState = 3;
+        frames[1]->currentFrame = false;
+        frames[2]->currentFrame = false;
+        frames[0]->currentFrame = false;
+    }
+    
+    if(currentFrameState == 0){
+        tempVariable = 0;
+        frames[0]->endClick = false;
+    } else if (currentFrameState == 1){
+        tempVariable = 1;
+        frames[1]->endClick = false;
+    } else if (currentFrameState == 2){
+        tempVariable = 2;
+        frames[2]->endClick = false;
+    } else if (currentFrameState == 3){
+        tempVariable = 3;
+        frames[3]->endClick = false;
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    if(parser->renderWindowHideWindow == true) {
-        parser->renderWindowWithCode = false;
-        secondWindow->hide();
-
-    }
-    
-    if(parser->renderWindowWithCode == true) {
-        secondWindow->begin();
-        ofSetColor(255);
-        ofEllipse(20, 20, 20, 20);
-        secondWindow->end();
-        cout << parser->renderWindowWithCode << endl;
-    }
-    
-    if(parser->renderWindow == true && secondWindowRendered == false){
-        this->secondWindow = new MultipleWindows(300, 300);
-        secondWindow->setup("second window", 10, 10, 300, 300, false);
-        secondWindowRendered = true;
-    }
+//    if(parser->renderWindowHideWindow == true) {
+//        parser->renderWindowWithCode = false;
+//        secondWindow->hide();
+//
+//    }
+//    
+//    if(parser->renderWindowWithCode == true) {
+//        secondWindow->begin();
+//        ofSetColor(255);
+//        ofEllipse(20, 20, 20, 20);
+//        secondWindow->end();
+//        cout << parser[0]->renderWindowWithCode << endl;
+//    }
+//    
+//    if(parser->renderWindow == true && secondWindowRendered == false){
+//        this->secondWindow = new MultipleWindows(300, 300);
+//        secondWindow->setup("second window", 10, 10, 300, 300, false);
+//        secondWindowRendered = true;
+//    }
     
     
 //    if(parser->renderWindow == true){
@@ -147,25 +201,75 @@ void ofApp::draw(){
 //        ofVertex(0, 300);
 //        ofVertex(180, 300);
 //    ofEndShape();
+    
+    for (int i = 0; i < numOfFrames; i++){
+        if (frames[i]->startClick == true){
+            verdana.drawString(frames[i]->typed->typedInput, editor->textStartX, editor->textStartY);
 
-    verdana.drawString(parser->typed, editor->textStartX, editor->textStartY);
+//            i = currentFrameState;
+        }
+    }
+//    verdana.drawString(frames[currentFrameState]->typed->typedInput, editor->textStartX, editor->textStartY);
+
+
+//    for (int i = 0; i < numOfFrames; i++){
+//        if (frames[i]->currentFrame == true){
+//            verdana.drawString(frames[i]->typed->typedInput, editor->textStartX, editor->textStartY);
+//        }
+//    }
 //    if (float stringWidth(parser->typed)){
 //        
 //    }
+//    cout<<"currentFrameState is " <<tempVariable<<endl;
+//    
+    for (int i = 0; i < numOfFrames; i++){
+        if (frames[i]->startClick == true ){
+            frames[i]->frameIsCurrent();
+            cout<<i<<endl;
+            
+        }
+    }
+//        if (frames[i]->endClick == true){
+//            frames[i]->endClicked = true;
+//        }
+//    }
+//    cout << "is frame 0 current?" << frames[0]->currentFrame << endl;
+//    cout << "is frame 1 current?" << frames[1]->currentFrame << endl;
+//    cout << "is frame 2 current?" << frames[2]->currentFrame << endl;
+//    cout << "is frame 3 current?" << frames[3]->currentFrame << endl;
+//    cout << "is frame 4 current?" << frames[4]->currentFrame << endl;
+//    cout << "is frame 5 current?" << frames[5]->currentFrame << endl;
+//    cout << "is frame 6 current?" << frames[6]->currentFrame << endl;
+//    cout << "is frame 7 current?" << frames[7]->currentFrame << endl;
+//    cout << "is frame 8 current?" << frames[8]->currentFrame << endl;
     
-    cout << parser->stringWidth(parser->typed) <<endl;
+    cout<< "frame 0 string: " << frames[0]->typed->typedInput << endl;
+    cout<< "frame 1 string: " << frames[1]->typed->typedInput << endl;
+    cout<< "frame 2 string: " << frames[2]->typed->typedInput << endl;
+    cout<< "frame 3 string: " << frames[3]->typed->typedInput << endl;
+    cout<< "frame 4 string: " << frames[4]->typed->typedInput << endl;
+    cout<< "frame 5 string: " << frames[5]->typed->typedInput << endl;
+    cout<< "frame 6 string: " << frames[6]->typed->typedInput << endl;
+    cout<< "frame 7 string: " << frames[7]->typed->typedInput << endl;
+    cout<< "frame 8 string: " << frames[8]->typed->typedInput << endl;
+
     
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    parser->keyPressed(key);
+    for (int i = 0; i < numOfFrames; i++){
+        frames[i]->keyPressed(key);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)
 {
-    parser->keyReleased(key);
+    for (int i = 0; i < numOfFrames; i++){
+        frames[i]->keyReleased(key);
+    }
 }
 
 //--------------------------------------------------------------
@@ -198,17 +302,13 @@ void ofApp::mouseMoved(int x, int y ){
     
     if (areaOfSubtriangle1 + areaOfSubtriangle2 + areaOfSubtriangle3 == areaOfTriangle + 75* body1->xPosLeft && head->mouseOver != true){
         body1->mouseOver = true;
+        numOfFrames = 9;
+        numOfColumns = 3;
     }
     else {
         body1->mouseOver = false;
     }
 
-//    cout<<areaOfTriangle<<endl;
-//    cout<<areaOfSubtriangle1 << "+" << areaOfSubtriangle2 << "+" << areaOfSubtriangle3 << endl;
-//    cout<<areaOfSubtriangle3 + areaOfSubtriangle2 + areaOfSubtriangle1 << endl;
-    
-//    cout<<body1->mouseOver<<endl;
-//    cout<<head->mouseOver<<endl;
 }
 
 //--------------------------------------------------------------
@@ -240,13 +340,18 @@ void ofApp::mousePressed(int x, int y, int button){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
 //            frames[i]->height = 10;
             frames[i]->startClick = true;
+            
         }
-        else {
+        if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
+            //            frames[i]->height = 10;
             frames[i]->startClick = false;
+            
         }
+        cout<<i<<endl;
     }
-    cout << x << "," << y <<endl;
-    
+//    for (int i = 0; i < numOfFrames; i++){
+//        frames[i]->mousePressed(x, y, button);
+//    }
     
     if(head->mouseOver == true){
         head->xPos = x;
@@ -260,6 +365,11 @@ void ofApp::mousePressed(int x, int y, int button){
         rightEye->xPos = x;
         rightEye->yPos = y;
     }
+    
+//    cout <<"frame0: " <<frames[0] -> endClick << endl;
+//    cout <<"frame1: " <<frames[1] -> endClick << endl;
+//    cout <<"frame2: " <<frames[2] -> endClick << endl;
+//    cout <<"frame3: " <<frames[3] -> endClick << endl;
 }
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
@@ -267,10 +377,17 @@ void ofApp::mouseReleased(int x, int y, int button){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
             frames[i]->endClick = true;
         }
-        else {
+        if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
+            //            frames[i]->height = 10;
             frames[i]->endClick = false;
+            
         }
     }
+    
+//    for (int i = 0; i < numOfFrames; i++){
+//        frames[i]->mouseReleased(x, y, button);
+//    }
+
     head->xPos = 620;
     head->yPos = 305;
     leftEye->xPos = 586;
@@ -279,13 +396,13 @@ void ofApp::mouseReleased(int x, int y, int button){
     rightEye->yPos = 328;
     
     if (headBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        parser->typed = parser->typed + " head ";
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " head ";
     }
     if (leftEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        parser->typed = parser->typed + " eye ";
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " eye ";
     }
     if (rightEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        parser->typed = parser->typed + " eye ";
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " eye ";
     }
 }
 //--------------------------------------------------------------
