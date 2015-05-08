@@ -8,7 +8,7 @@
 
 #include "Frame.h"
 
-Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool startClick, bool endClick){
+Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool startClick, bool endClick, int xPosText, int yPosText){
     this->xPos = xPos;
     this->yPos = yPos;
     this->width = width;
@@ -16,13 +16,22 @@ Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool
     this->frameColor = frameColor;
     this->startClick = startClick;
     this->endClick = endClick;
+    this->typed = new Typed ("");
     this->setup();
+    this->xPosText = xPosText;
+    this->yPosText = yPosText;
 }
 
 void Frame::setup(){
+    ofTrueTypeFont::setGlobalDpi(72);
+    verdana.loadFont("verdana.ttf", 14,true, true);
+    verdana.setLineHeight(18.0f);
+    verdana.setLetterSpacing(1.037);
     ofSetColor(frameColor);
     ofRect(xPos,yPos,width,height);
-
+    
+    //instantiating typed into frame
+    typed->setup();
     
     //joints
     topLeft.set(xPos,yPos,0);
@@ -40,7 +49,7 @@ void Frame::setup(){
 void Frame::draw(){
     ofSetColor(frameColor);
     ofRect(xPos,yPos,width,height);
-    
+    typed->update();
     //testing joint positions
     if (startClick == true){
         ofSetColor(255,0,0,50);
@@ -61,11 +70,56 @@ void Frame::draw(){
         ofRect(xPos,yPos,width,height);
     }
     
-    if (startClick == true && endClick == true){
-        currentFrame = true;
+//    if (startClicked == true && endClicked == true){
+//        ofSetColor(255,255,255,100);
+//        ofRect(xPos + 10,yPos + 10,width,height);
+//        currentFrame = true;
+//    }
+    
+    if (currentFrame == true){
     }
     
-//    cout << startClick <<endl;
-//    cout << endClick <<endl;
+    cout << startClick <<endl;
+    cout << endClick <<endl;
+//    if (startClick == true && endClick == true && isAFrame == true){
+//        startClicked = true;
+//        endClicked = true;
+//        startClick = false;
+//        endClick = false;
+    }
+//    if (startClicked == true && endClicked == true){
+//        ofSetColor(255, 255, 255, 100);
+//        ofRect(xPos + 10, yPos + 10, width, height);
+//        currentFrame = true;
+//    }
     
+//}
+
+//void Frame::mousePressed(int x, int y, int button){
+//    startClick = true;
+//    cout<<"HI"<<endl;
+//}
+//
+//void Frame::mouseReleased(int x, int y, int button){
+//    endClick = true;
+//}
+
+void Frame::frameIsCurrent(){
+    ofSetColor(255,0,0);
+    ofNoFill();
+    ofEllipse(xPos+width/2, yPos+width/2, width/4, height/4);
+    ofFill();
+    pressedKey = true;
+    verdana.drawString(typed->typedInput, xPosText, yPosText);
+}
+
+void Frame::keyPressed(int key){
+    if (pressedKey == true){
+        typed->keyPressed(key);
+    }
+}
+void Frame::keyReleased(int key){
+    if (pressedKey == true){
+        typed->keyReleased(key);
+    }
 }

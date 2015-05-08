@@ -9,23 +9,32 @@
 #pragma once
 #include <stdio.h>
 #include "ofMain.h"
+#include "Typed.h"
 
 class Frame{
 public:
-    Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool startClick, bool endClick);
+    Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool startClick, bool endClick, int xPosText, int yPosText);
     void setup();
     void draw();
-    //    void mouseDragged(int x, int y, int button);
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void frameIsCurrent();
     //    void resize();
     int xPos, yPos, width, height;
+    int xPosText, yPosText;
+    bool isAFrame;
     ofColor frameColor;
     ofVec3f top, topLeft, topRight;
     ofVec3f bot, botLeft, botRight;
     ofVec3f left;
     ofVec3f right;
     bool currentFrame;
-    
-    bool startClick;
-    bool endClick;
-    
+    bool startClick, startClicked;
+    bool endClick, endClicked;
+    bool pressedKey;
+    bool releasedKey;
+    Typed * typed;
+    ofTrueTypeFont verdana;
 };
