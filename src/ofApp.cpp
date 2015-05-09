@@ -3,8 +3,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    logo.loadImage("bunnyPlusPlusLogo.png");
+    
     ofTrueTypeFont::setGlobalDpi(72);
-    verdana.loadFont("verdana.ttf", 14,true, true);
+    verdana.loadFont("verdana.ttf", 20,true, true);
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
     
@@ -34,9 +36,9 @@ void ofApp::setup(){
     
     const float armScaleX = 0.8f;
     const float armScaleY = 0.8f;
-    const float armScaleZ = 0.8f;
-    this->arm1 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 620, 380, 50, 90, ofColor(255,100,100), false);
-    this->arm2 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 640, 430, 50, 270, ofColor(100,100,255), false);
+    const float armScaleZ = identityScale;
+    this->arm1 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 618, 380, 50, 90, ofColor(255,100,100), false);
+    this->arm2 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 632, 425, 50, 270, ofColor(100,100,255), false);
 
     const float bodyScaleX = 1.0f;
     const float bodyScaleY = 1.0f;
@@ -161,6 +163,7 @@ void ofApp::draw(){
     leftEye->draw();
     rightEye->draw();
     editor->draw();
+
     plusButton->drawPlus();
     minusButton->drawMinus();
     
@@ -168,7 +171,7 @@ void ofApp::draw(){
         frames[i]->frameColor = lavender;
         frames[i]->draw();
     }
-    
+        logo.draw(editor->xPos, editor->yPos, 50, 60);
 //      cout << frames[0]->startClick <<endl;
 //    ofSetColor(0, 0, 0);
 //    ofBeginShape();
@@ -210,15 +213,15 @@ void ofApp::draw(){
 //    }
 
     
-    cout<< "frame 0 string: " << frames[0]->typed->typedInput << endl;
-    cout<< "frame 1 string: " << frames[1]->typed->typedInput << endl;
-    cout<< "frame 2 string: " << frames[2]->typed->typedInput << endl;
-    cout<< "frame 3 string: " << frames[3]->typed->typedInput << endl;
-    cout<< "frame 4 string: " << frames[4]->typed->typedInput << endl;
-    cout<< "frame 5 string: " << frames[5]->typed->typedInput << endl;
-    cout<< "frame 6 string: " << frames[6]->typed->typedInput << endl;
-    cout<< "frame 7 string: " << frames[7]->typed->typedInput << endl;
-    cout<< "frame 8 string: " << frames[8]->typed->typedInput << endl;
+//    cout<< "frame 0 string: " << frames[0]->typed->typedInput << endl;
+//    cout<< "frame 1 string: " << frames[1]->typed->typedInput << endl;
+//    cout<< "frame 2 string: " << frames[2]->typed->typedInput << endl;
+//    cout<< "frame 3 string: " << frames[3]->typed->typedInput << endl;
+//    cout<< "frame 4 string: " << frames[4]->typed->typedInput << endl;
+//    cout<< "frame 5 string: " << frames[5]->typed->typedInput << endl;
+//    cout<< "frame 6 string: " << frames[6]->typed->typedInput << endl;
+//    cout<< "frame 7 string: " << frames[7]->typed->typedInput << endl;
+//    cout<< "frame 8 string: " << frames[8]->typed->typedInput << endl;
 
     
 
@@ -261,6 +264,33 @@ void ofApp::mouseMoved(int x, int y ){
         head->mouseOver = false;
     }
     
+    leftArmCenterX = 500;
+    leftArmCenterY = 402;
+    rightArmCenterX = 750;
+    rightArmCenterY = 402;
+    
+    leftLegCenterX;
+    leftLegCenterY;
+    rightLegCenterX;
+    rightLegCenterY;
+    leftEarCenterX;
+    leftEarCenterY;
+    rightEarCenterX;
+    rightEarCenterY;    //checking if in left arm
+    if(ofDist(leftArmCenterX,leftArmCenterY,x,y) <= 30){
+        arm1->mouseOver = true;
+    }else{
+        arm1->mouseOver = false;
+    }
+    //checking if in right arm
+    if(ofDist(rightArmCenterX,rightArmCenterY,x,y) <= 30){
+        arm2->mouseOver = true;
+    }else{
+        arm2->mouseOver = false;
+    }
+    
+    
+    
     //checking if in triangle / body
     
     areaOfSubtriangle1 = ABS(x*(body1->yPos - body1->yPosLeft) + body1->xPos *(body1->yPosLeft - y) + body1->xPosLeft*(y - body1->yPos))/2;
@@ -299,6 +329,53 @@ void ofApp::mouseDragged(int x, int y, int button){
         rightEye->yPos = y;
         rightEyeBeingDragged = true;
     }
+    
+    //arms
+    
+    leftArmCenterX = 500;
+    leftArmCenterY = 402;
+    rightArmCenterX = 750;
+    rightArmCenterY = 402;
+    
+    if(arm1->mouseOver == true){
+        arm1->transX = 618 + (x - leftArmCenterX);
+        arm1->transY = 380 + (y - leftArmCenterY);
+        arm1BeingDragged = true;
+    }
+    if(arm2->mouseOver == true){
+        arm2->transX = 632 + (x - rightArmCenterX);
+        arm2->transY = 425 + (y - rightArmCenterY);
+        arm2BeingDragged = true;
+    }
+    leftLegCenterX;
+    leftLegCenterY;
+    rightLegCenterX;
+    rightLegCenterY;
+    leftEarCenterX;
+    leftEarCenterY;
+    rightEarCenterX;
+    rightEarCenterY;
+    
+    //body
+    
+    bodyCenterPointX = 600;
+    bodyCenterPointY = 425;
+    bodyDifferenceX = x - bodyCenterPointX;
+    bodyDifferenceY = y - bodyCenterPointY;
+    
+    if(body1->mouseOver ==true){
+        bodyCenterPointX = 600;
+        bodyCenterPointY = 425;
+        bodyDifferenceX = x - bodyCenterPointX;
+        bodyDifferenceY = y - bodyCenterPointY;
+        body1->xPos = 620 + bodyDifferenceX;
+        body1->yPos = 250 + bodyDifferenceY;
+        body1->xPosLeft = 500 + bodyDifferenceX;
+        body1->yPosLeft = 600 + bodyDifferenceY;
+        body1->xPosRight = 750 + bodyDifferenceX;
+        body1->yPosRight = 600 + bodyDifferenceY;
+        body1BeingDragged = true;
+    }
 }
 
 //--------------------------------------------------------------
@@ -306,6 +383,8 @@ void ofApp::mousePressed(int x, int y, int button){
     headBeingDragged = false;
     leftEyeBeingDragged = false;
     rightEyeBeingDragged = false;
+    arm1BeingDragged = false;
+    arm2BeingDragged = false;
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
 //            frames[i]->height = 10;
@@ -335,11 +414,6 @@ void ofApp::mousePressed(int x, int y, int button){
         rightEye->xPos = x;
         rightEye->yPos = y;
     }
-    
-//    cout <<"frame0: " <<frames[0] -> endClick << endl;
-//    cout <<"frame1: " <<frames[1] -> endClick << endl;
-//    cout <<"frame2: " <<frames[2] -> endClick << endl;
-//    cout <<"frame3: " <<frames[3] -> endClick << endl;
 }
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
@@ -353,15 +427,22 @@ void ofApp::mouseReleased(int x, int y, int button){
             frames[i]->endClick = false;
         }
     }
-//    for (int i = 0; i < numOfFrames; i++){
-//        frames[i]->mouseReleased(x, y, button);
-//    }
     head->xPos = 620;
     head->yPos = 305;
     leftEye->xPos = 586;
     leftEye->yPos = 328;
     rightEye->xPos = 661;
     rightEye->yPos = 328;
+    body1->xPos = 620;
+    body1->yPos = 250;
+    body1->xPosLeft = 500;
+    body1->yPosLeft = 600;
+    body1->xPosRight = 750;
+    body1->yPosRight = 600;
+    arm1->transX = 618;
+    arm1->transY = 380;
+    arm2->transX = 632;
+    arm2->transY = 425;
     
     if (headBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
         frames[0]->typed->typedInput = frames[0]->typed->typedInput + " head ";
@@ -371,6 +452,9 @@ void ofApp::mouseReleased(int x, int y, int button){
     }
     if (rightEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
         frames[0]->typed->typedInput = frames[0]->typed->typedInput + " eye ";
+    }
+    if (body1BeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " body ";
     }
 }
 //--------------------------------------------------------------

@@ -62,10 +62,17 @@ class ofApp : public ofBaseApp{
     float areaOfSubtriangle1;
     float areaOfSubtriangle2;
     float areaOfSubtriangle3;
+    int bodyCenterPointX;
+    int bodyCenterPointY;
+    int bodyDifferenceX;
+    int bodyDifferenceY;
+    
+    int leftArmCenterX, leftArmCenterY, rightArmCenterX, rightArmCenterY, leftLegCenterX, leftLegCenterY, rightLegCenterX, rightLegCenterY, leftEarCenterX, leftEarCenterY, rightEarCenterX, rightEarCenterY;
+    
     
     ofTrueTypeFont verdana;
     
-    bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged;
+    bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged, body1BeingDragged, arm1BeingDragged, arm2BeingDragged, leftEarBeingDragged, rightEarBeingDragged, leftLegBeingDragged, rightLegBeingDragged;
     bool secondWindowRendered;
     
     MultipleWindows *secondWindow;
@@ -78,6 +85,8 @@ class ofApp : public ofBaseApp{
     
     UIButton * plusButton;
     UIButton * minusButton;
+    
+    ofImage logo;
     
 private:
     ofxTransparentWindow transparent;
