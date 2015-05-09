@@ -66,6 +66,22 @@ void ofApp::setup(){
                              (1+floor(i/float(numOfColumns)))*buffer + (floor(i/float(numOfColumns)))*frameHeight,
                              frameWidth, frameHeight, lavender,false, false, editor->textStartX, editor->textStartY);
     }
+    
+    this->plusButton = new UIButton(1);
+    this->minusButton = new UIButton(2);
+    
+    plusButton->xPos = 600;
+    plusButton->yPos = 10;
+    plusButton->width = 12;
+    plusButton->height = 12;
+    plusButton->defaultColor = ofColor(0,255,255);
+    plusButton->numberToAlter = numOfFrames;
+    minusButton->xPos = 620;
+    minusButton->yPos = 10;
+    minusButton->width = 12;
+    minusButton->height = 12;
+    minusButton->defaultColor = ofColor(0,255,255);
+    minusButton->numberToAlter = numOfFrames;
 //    xPos, yPos, width, height
 //    for (int i = 0; i < numOfFrames; i++){
 //        parser.resize(numOfFrames);
@@ -145,6 +161,8 @@ void ofApp::draw(){
     leftEye->draw();
     rightEye->draw();
     editor->draw();
+    plusButton->drawPlus();
+    minusButton->drawMinus();
     
     for (int i = 0;  i < numOfFrames; i++){
         frames[i]->frameColor = lavender;
@@ -258,6 +276,9 @@ void ofApp::mouseMoved(int x, int y ){
         body1->mouseOver = false;
     }
 
+    if (x >= plusButton->xPos && x <= plusButton->xPos + plusButton->width && x>= plusButton->yPos && x <= plusButton->yPos + plusButton->height){
+        plusButton->defaultColor = ofColor(255, 0, 0);
+    }
 }
 
 //--------------------------------------------------------------
@@ -335,7 +356,6 @@ void ofApp::mouseReleased(int x, int y, int button){
 //    for (int i = 0; i < numOfFrames; i++){
 //        frames[i]->mouseReleased(x, y, button);
 //    }
-
     head->xPos = 620;
     head->yPos = 305;
     leftEye->xPos = 586;

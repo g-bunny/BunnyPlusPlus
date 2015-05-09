@@ -4,8 +4,6 @@
 #include "ofxTransparentWindow.h"
 #include "multipleWindows.h"
 #include "Frame.h"
-//#include "text.h"
-//#include "bunnyParts.h"
 #include "WaterDrop.h"
 #include "Head.h"
 #include "Body.h"
@@ -32,6 +30,7 @@ class ofApp : public ofBaseApp{
 //    vector<int> startFrame;
 //    vector<int> endFrame;
     vector <Frame*> frames;
+
     
     Frame *testFrame;
     int numOfFrames;
@@ -76,6 +75,10 @@ class ofApp : public ofBaseApp{
     
     //state: frames = 1; body parts = 2; editor = 3; general environment = 4
     int whatObjectIsClicked;
+    
+    UIButton * plusButton;
+    UIButton * minusButton;
+    
 private:
     ofxTransparentWindow transparent;
 
