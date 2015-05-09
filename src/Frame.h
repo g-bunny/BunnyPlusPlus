@@ -11,7 +11,7 @@
 #include "ofMain.h"
 #include "Typed.h"
 #include "Parser.h"
-#include "Button.h"
+#include "UIButton.h"
 
 class Frame{
 public:
@@ -41,7 +41,7 @@ public:
     Parser * parser;
     ofTrueTypeFont verdana;
     
-    Button * plusButton;
-    Button * minusButton;
+    UIButton * playButton;
+    UIButton * stopButton;
     
 };

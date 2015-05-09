@@ -45,7 +45,8 @@ void Frame::setup(){
     right.set(xPos + width, yPos + height/2, 0);
     startClick = false;
     endClick = false;
-    this->plusButton = new Button(1);
+    this->playButton = new UIButton(3);
+    this->stopButton = new UIButton(4);
 }
 
 void Frame::draw(){
@@ -108,11 +109,14 @@ void Frame::frameIsCurrent(){
     ofNoFill();
     ofEllipse(xPos+width/2, yPos+width/2, width/4, height/4);
     ofFill();
-    plusButton->xPos = xPos + width * 5/6;
-    plusButton->yPos = yPos + width / 6;
-    plusButton->width = 10;
-    plusButton->height = 10;
-    plusButton->drawPlus();
+    playButton->xPos = xPos + width * 5/6;
+    playButton->yPos = yPos + width / 6;
+    playButton->width = 10;
+    playButton->drawPlay();
+//    playButton->mouseReleased(int x, int y, int button);
+    if (playButton->playThings == true){
+        playButton->drawStop();
+    }
     pressedKey = true;
     verdana.drawString(typed->typedInput, xPosText, yPosText);
     this->parser = new Parser(typed->typedInput);
