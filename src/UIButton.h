@@ -8,17 +8,16 @@
 
 #include "ofMain.h"
 
-class Button{
+class UIButton{
 public:
-    
-    Button(int buttonType);
+    UIButton(int buttonType);
     
     void drawPlus();
     void drawMinus();
     void drawPlay();
     void drawStop();
     
-    void mouseReleased(int button);
+    void mouseReleased(int x, int y, int button);
     
     int width;
     int height;
@@ -28,8 +27,7 @@ public:
     int buttonType;
     int numberToAlter;
     bool playThings, destroyThings;
-    ofColor whiteColor;
-    ofColor blackColor;
+    ofColor defaultColor;
     ofColor mouseOverColor;
     bool mouseOver;
     
