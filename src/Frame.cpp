@@ -25,7 +25,7 @@ Frame::Frame(int xPos, int yPos, int width, int height, ofColor frameColor, bool
 
 void Frame::setup(){
     ofTrueTypeFont::setGlobalDpi(72);
-    verdana.loadFont("verdana.ttf", 14,true, true);
+    verdana.loadFont("verdana.ttf", 20,true, true);
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
     ofSetColor(frameColor);
@@ -81,8 +81,8 @@ void Frame::draw(){
     
     if (currentFrame == true){
     }
-    cout << startClick <<endl;
-    cout << endClick <<endl;
+//    cout << startClick <<endl;
+//    cout << endClick <<endl;
 //    if (startClick == true && endClick == true && isAFrame == true){
 //        startClicked = true;
 //        endClicked = true;
