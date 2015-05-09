@@ -20,7 +20,7 @@ void Typed::update(){
     //    cout<<typed<<endl;
     if (typedInput == ""){
         empty = true;
-        cout << "Im empty" << endl;
+//        cout << "Im empty" << endl;
     }else{
     }
 }
