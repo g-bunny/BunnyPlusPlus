@@ -69,6 +69,7 @@ class ofApp : public ofBaseApp{
     
     int leftArmCenterX, leftArmCenterY, rightArmCenterX, rightArmCenterY, leftLegCenterX, leftLegCenterY, rightLegCenterX, rightLegCenterY, leftEarCenterX, leftEarCenterY, rightEarCenterX, rightEarCenterY;
     
+    int initialArm1X, initialArm1Y, initialArm2X, initialArm2Y, initialLeg1X, initialLeg1Y, initialLeg2X, initialLeg2Y, initialEar1X, initialEar1Y, initialEar2X, initialEar2Y;
     
     ofTrueTypeFont verdana;
     

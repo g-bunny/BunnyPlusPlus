@@ -25,14 +25,22 @@ void ofApp::setup(){
     const float earScaleX = 0.8f;
     const float earScaleY = identityScale;
     const float earScaleZ = identityScale;
-    this->ear1 = new WaterDrop(earScaleX, earScaleY, earScaleZ, 605, 295, 100, 180, red, false);
-    this->ear2 = new WaterDrop(earScaleX, earScaleY, earScaleZ, 695, 295, 100, 180, purple, false);
+    initialEar1X = 605;
+    initialEar1Y = 295;
+    initialEar2X = 695;
+    initialEar2Y = 295;
+    this->ear1 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar1X, initialEar1Y, 100, 180, red, false);
+    this->ear2 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar2X, initialEar2Y, 100, 180, purple, false);
     
     const float legScaleX = 0.8;
     const float legScaleY = 1.0f;
     const float legScaleZ = 1.0f;
-    this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, 585, 495, 100, 10,ofColor(5,255,0), false);
-    this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, 625, 502, 100, -10,ofColor(5,255,255), false);
+    initialLeg1X = 585;
+    initialLeg1Y = 495;
+    initialLeg2X = 625;
+    initialLeg2Y = 502;
+    this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg1X, initialLeg1Y, 100, 10,ofColor(5,255,0), false);
+    this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg2X, initialLeg2Y, 100, -10,ofColor(5,255,255), false);
     
     const float armScaleX = 0.8f;
     const float armScaleY = 0.8f;
@@ -269,14 +277,19 @@ void ofApp::mouseMoved(int x, int y ){
     rightArmCenterX = 750;
     rightArmCenterY = 402;
     
-    leftLegCenterX;
-    leftLegCenterY;
-    rightLegCenterX;
-    rightLegCenterY;
-    leftEarCenterX;
-    leftEarCenterY;
-    rightEarCenterX;
-    rightEarCenterY;    //checking if in left arm
+    leftLegCenterX = 570;
+    leftLegCenterY = 660;
+    rightLegCenterX = 680;
+    rightLegCenterY = 660;
+    
+    
+    
+    leftEarCenterX = 565;
+    leftEarCenterY = 100;
+    rightEarCenterX = 675;
+    rightEarCenterY = 100;
+    
+    //checking if in left arm
     if(ofDist(leftArmCenterX,leftArmCenterY,x,y) <= 30){
         arm1->mouseOver = true;
     }else{
@@ -289,8 +302,29 @@ void ofApp::mouseMoved(int x, int y ){
         arm2->mouseOver = false;
     }
     
+    //checking legs
+    if(ofDist(leftLegCenterX, leftLegCenterY, x, y) <= 35){
+        leg1->mouseOver = true;
+    }else{
+        leg1->mouseOver = false;
+    }
+    if(ofDist(rightLegCenterX, rightLegCenterY, x, y) <= 35){
+        leg2->mouseOver = true;
+    }else{
+        leg2->mouseOver = false;
+    }
     
-    
+    //checking ears
+    if(ofDist(leftEarCenterX, leftEarCenterY, x, y) < 30){
+        ear1->mouseOver = true;
+    } else {
+        ear1->mouseOver = false;
+    }
+    if(ofDist(rightEarCenterX, rightEarCenterY, x, y) < 30){
+        ear2->mouseOver = true;
+    } else {
+        ear2->mouseOver = false;
+    }
     //checking if in triangle / body
     
     areaOfSubtriangle1 = ABS(x*(body1->yPos - body1->yPosLeft) + body1->xPos *(body1->yPosLeft - y) + body1->xPosLeft*(y - body1->yPos))/2;
@@ -347,15 +381,42 @@ void ofApp::mouseDragged(int x, int y, int button){
         arm2->transY = 425 + (y - rightArmCenterY);
         arm2BeingDragged = true;
     }
-    leftLegCenterX;
-    leftLegCenterY;
-    rightLegCenterX;
-    rightLegCenterY;
-    leftEarCenterX;
-    leftEarCenterY;
-    rightEarCenterX;
-    rightEarCenterY;
+    leftLegCenterX = 570;
+    leftLegCenterY = 660;
+    rightLegCenterX = 680;
+    rightLegCenterY = 660;
     
+    //legs
+    
+    if(leg1->mouseOver == true){
+        leg1->transX = initialLeg1X + (x-leftLegCenterX);
+        leg1->transY = initialLeg1Y + (y-leftLegCenterY);
+        leftLegBeingDragged = true;
+    }
+    if(leg2->mouseOver == true){
+        leg2->transX = initialLeg2X + (x-rightLegCenterX);
+        leg2->transY = initialLeg2Y + (y-rightLegCenterY);
+        rightLegBeingDragged = true;
+    }
+       
+       
+    leftEarCenterX = 565;
+    leftEarCenterY = 50;
+    rightEarCenterX = 675;
+    rightEarCenterY = 50;
+    
+    //ears
+    if(ear1->mouseOver == true){
+        ear1->transX = initialEar1X + (x-leftEarCenterX);
+        ear1->transY = initialEar1Y + (y-60-leftEarCenterY);
+        leftEarBeingDragged = true;
+    }
+    if(ear2->mouseOver==true){
+        ear2->transX = initialEar2X + (x-rightEarCenterX);
+        ear2->transY = initialEar2Y + (y-60-rightEarCenterY);
+        rightEarBeingDragged = true;
+    }
+       
     //body
     
     bodyCenterPointX = 600;
@@ -385,6 +446,12 @@ void ofApp::mousePressed(int x, int y, int button){
     rightEyeBeingDragged = false;
     arm1BeingDragged = false;
     arm2BeingDragged = false;
+    leftLegBeingDragged = false;
+    rightLegBeingDragged = false;
+    leftEarBeingDragged = false;
+    rightEarBeingDragged =  false;
+    body1BeingDragged = false;
+    
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
 //            frames[i]->height = 10;
@@ -398,9 +465,6 @@ void ofApp::mousePressed(int x, int y, int button){
         }
         cout<<i<<endl;
     }
-//    for (int i = 0; i < numOfFrames; i++){
-//        frames[i]->mousePressed(x, y, button);
-//    }
     
     if(head->mouseOver == true){
         head->xPos = x;
@@ -443,6 +507,14 @@ void ofApp::mouseReleased(int x, int y, int button){
     arm1->transY = 380;
     arm2->transX = 632;
     arm2->transY = 425;
+    leg1->transX = initialLeg1X;
+    leg1->transY = initialLeg1Y;
+    leg2->transX = initialLeg2X;
+    leg2->transY = initialLeg2Y;
+    ear1->transX = initialEar1X;
+    ear1->transY = initialEar1Y;
+    ear2->transX = initialEar2X;
+    ear2->transY = initialEar2Y;
     
     if (headBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
         frames[0]->typed->typedInput = frames[0]->typed->typedInput + " head ";
@@ -456,6 +528,25 @@ void ofApp::mouseReleased(int x, int y, int button){
     if (body1BeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
         frames[0]->typed->typedInput = frames[0]->typed->typedInput + " body ";
     }
+    if (arm1BeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " arm ";
+    }
+    if (arm2BeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " arm ";
+    }
+    if (leftLegBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " leg ";
+    }
+    if (rightLegBeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " leg ";
+    }
+    if (leftEarBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " ear ";
+    }
+    if (rightEarBeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
+        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " ear ";
+    }
+
 }
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
