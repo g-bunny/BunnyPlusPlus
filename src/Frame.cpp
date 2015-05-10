@@ -88,6 +88,8 @@ void Frame::draw(){
 //        endClicked = true;
 //        startClick = false;
 //        endClick = false;
+    cout<<"playThisFrame"<<playThisFrame<<endl;
+
     }
 //    if (startClicked == true && endClicked == true){
 //        ofSetColor(255, 255, 255, 100);
@@ -100,9 +102,12 @@ void Frame::draw(){
 //    cout<<"HI"<<endl;
 //}
 //
-//void Frame::mouseReleased(int x, int y, int button){
-//    endClick = true;
-//}
+void Frame::mouseReleased(int x, int y, int button){
+    if (x >= playButton->xPos && x <= playButton->xPos + playButton->width && y <= playButton->yPos && y >= playButton->yPos + playButton->width){
+        playThisFrame = true;
+        cout<<"playThisFrame"<<playThisFrame<<endl;
+    } else {playThisFrame = false;}
+}
 
 void Frame::frameIsCurrent(){
     ofSetColor(255,0,0);

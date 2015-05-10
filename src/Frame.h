@@ -44,4 +44,6 @@ public:
     UIButton * playButton;
     UIButton * stopButton;
     
+    bool playThisFrame;
+    
 };
