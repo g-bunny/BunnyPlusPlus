@@ -94,6 +94,12 @@ class ofApp : public ofBaseApp{
     float stringInitialWidth = 0;
     bool stringMaxReached;
     
+    ofColor lighterTeal = ofColor (178, 255, 233);
+    ofColor teal = ofColor(178, 245, 225);
+    ofColor darkerTeal = ofColor(168, 235, 220);
+    ofColor darkestTeal = ofColor(150, 225, 210);
+    
+    
 private:
     ofxTransparentWindow transparent;
 

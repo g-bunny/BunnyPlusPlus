@@ -16,6 +16,9 @@ void ofApp::setup(){
     buffer = 20;
     numOfFrames = 9;
     numOfColumns = 3;
+    
+    this->editor = new CodeEditor(800,50,505,700);
+    
     const float identityScale = 1.0f;
     const ofColor black = ofColor(0, 0, 0);
     const ofColor red = ofColor(255, 0, 0);
@@ -28,8 +31,8 @@ void ofApp::setup(){
     initialEar1Y = 295;
     initialEar2X = 695;
     initialEar2Y = 295;
-    this->ear1 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar1X, initialEar1Y, 100, 180, red, false);
-    this->ear2 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar2X, initialEar2Y, 100, 180, purple, false);
+    this->ear1 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar1X, initialEar1Y, 100, 180, lighterTeal, false);
+    this->ear2 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar2X, initialEar2Y, 100, 180, lighterTeal, false);
     
     const float legScaleX = 0.8;
     const float legScaleY = 1.0f;
@@ -38,24 +41,25 @@ void ofApp::setup(){
     initialLeg1Y = 495;
     initialLeg2X = 625;
     initialLeg2Y = 502;
-    this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg1X, initialLeg1Y, 100, 10,ofColor(5,255,0), false);
-    this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg2X, initialLeg2Y, 100, -10,ofColor(5,255,255), false);
+    this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg1X, initialLeg1Y, 100, 10,darkestTeal, false);
+    this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg2X, initialLeg2Y, 100, -10,darkestTeal, false);
     
     const float armScaleX = 0.8f;
     const float armScaleY = 0.8f;
     const float armScaleZ = identityScale;
-    this->arm1 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 618, 380, 50, 90, ofColor(255,100,100), false);
-    this->arm2 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 632, 425, 50, 270, ofColor(100,100,255), false);
-
+    this->arm1 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 618, 380, 50, 90, darkestTeal, false);
+    arm1->mouseOverColor = ofColor(255,100,100);
+    this->arm2 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 632, 425, 50, 270, darkestTeal, false);
+    arm2->mouseOverColor = ofColor(255,100,100);
     const float bodyScaleX = 1.0f;
     const float bodyScaleY = 1.0f;
     const float bodyScaleZ = identityScale;
-    this->body1 = new Body(bodyScaleX, bodyScaleY, bodyScaleZ, 0, 0, 0,620, 250, 500, 600, 750, 600, ofColor(200,100,100), false);
+    this->body1 = new Body(bodyScaleX, bodyScaleY, bodyScaleZ, 0, 0, 0,620, 250, 500, 600, 750, 600, darkerTeal, false);
 
     const float headScaleX = identityScale;
     const float headScaleY = identityScale;
     const float headScaleZ = identityScale;
-    this->head = new Head(headScaleX, headScaleY, headScaleZ, 620,305,200,200, ofColor(100,100,200), false);
+    this->head = new Head(headScaleX, headScaleY, headScaleZ, 620,305,200,200, teal , false);
     
     const float leftEyeScaleX = identityScale;
     const float leftEyeScaleY = identityScale;
@@ -66,7 +70,7 @@ void ofApp::setup(){
     const float rightEyeScaleY = identityScale;
     const float rightEyeScaleZ = identityScale;
     this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 10, 10, black, false);
-    this->editor = new CodeEditor(800,50,505,700);
+
     
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
@@ -162,7 +166,7 @@ void ofApp::draw(){
     
     //to be used to calculate area of body
     areaOfTriangle = (ABS(body1->xPosRight*(body1->yPos - body1->yPosLeft) + body1->xPos *(body1->yPosLeft - body1->yPosRight) + body1->xPosLeft*(body1->xPosRight - body1->yPos))/2);
-    
+    editor->draw();
     ear1->draw();
     ear2->draw();
     leg1->draw();
@@ -173,7 +177,7 @@ void ofApp::draw(){
     head->draw();
     leftEye->draw();
     rightEye->draw();
-    editor->draw();
+
 
     plusButton->drawPlus();
     minusButton->drawMinus();
