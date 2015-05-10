@@ -20,9 +20,12 @@ public:
     int yPosLeft;
     int xPosRight;
     int yPosRight;
+//    int width;
+//    int height;
     int transX, transY, transZ;
     float scaleX, scaleY, scaleZ;
     bool mouseOver;
+//    float rotateAngle;
     ofColor color;
-    ofColor mouseOverColor = ofColor(255,255,255,100);
+    ofColor mouseOverColor = ofColor(200,100,100,180);
 };

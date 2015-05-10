@@ -27,6 +27,4 @@ void Head::draw(){
     ofScale(scaleX,scaleY,scaleZ);
     ofEllipse(xPos,yPos,width,height);
     ofPopMatrix();
-    
-    
 }

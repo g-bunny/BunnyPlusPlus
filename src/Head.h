@@ -20,7 +20,7 @@ class Head{
     int yPos;
     float scaleX, scaleY, scaleZ;
     ofColor color;
-    ofColor mouseOverColor = ofColor(255,255,255,100);
+    ofColor mouseOverColor = ofColor(100,100,200);
     bool mouseOver;
     
 };

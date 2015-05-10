@@ -48,7 +48,7 @@ public:
     bool mouseOver;
     
     ofColor bunnyPartColor;
-    ofColor mouseOverColor = ofColor(255,255,255,100);
+    ofColor mouseOverColor = ofColor(205,0,255,180);
     draggableVertex curveVertices[7];
     draggableVertex bezierVertices[4];
 };
