@@ -19,6 +19,8 @@ public:
     string toBeParsed;
     int tokenLength;
     bool empty;
-    bool renderWindow, renderWindowWithCode, renderWindowHideWindow;
+    bool playWindow, renderWindowWithCode, renderWindowHideWindow;
+    
+    int head, ear, eye, body, arm, leg, bubble;
 //    ofTrueTypeFont myFont;
 };
