@@ -4,7 +4,6 @@
 void ofApp::setup(){
     
     logo.loadImage("bunnyPlusPlusLogo.png");
-    
     ofTrueTypeFont::setGlobalDpi(72);
     verdana.loadFont("verdana.ttf", 20,true, true);
     verdana.setLineHeight(18.0f);
@@ -101,6 +100,10 @@ void ofApp::setup(){
 //    for (int i = 0; i < numOfFrames; i++){
 //        parser->typed.resize(numOfFrames);
 //    }
+    
+    //defaulting frames[0] as current
+    frames[0]->frameIsCurrent();
+    
     transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
 }
 
@@ -189,7 +192,7 @@ void ofApp::draw(){
 //    ofEndShape();
     
     for (int i = 0; i < numOfFrames; i++){
-        if (frames[i]->startClick == true){
+        if (frames[i]->endClick == true){
             verdana.drawString(frames[i]->typed->typedInput, editor->textStartX, editor->textStartY);
 
 //            i = currentFrameState;
@@ -212,15 +215,12 @@ void ofApp::draw(){
         if (frames[i]->endClick == true){
             frames[i]->frameIsCurrent();
             cout<<i<<endl;
-            
         }
     }
 //        if (frames[i]->endClick == true){
 //            frames[i]->endClicked = true;
 //        }
 //    }
-
-    
 //    cout<< "frame 0 string: " << frames[0]->typed->typedInput << endl;
 //    cout<< "frame 1 string: " << frames[1]->typed->typedInput << endl;
 //    cout<< "frame 2 string: " << frames[2]->typed->typedInput << endl;
@@ -252,7 +252,7 @@ void ofApp::keyReleased(int key)
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-    
+
     //checking if in circle / left eye
     if(ofDist(leftEye->xPos, leftEye->yPos, x, y) <= leftEye->width/2){
         leftEye->mouseOver = true;
@@ -271,7 +271,6 @@ void ofApp::mouseMoved(int x, int y ){
     }else{
         head->mouseOver = false;
     }
-    
     leftArmCenterX = 500;
     leftArmCenterY = 402;
     rightArmCenterX = 750;
@@ -281,8 +280,6 @@ void ofApp::mouseMoved(int x, int y ){
     leftLegCenterY = 660;
     rightLegCenterX = 680;
     rightLegCenterY = 660;
-    
-    
     
     leftEarCenterX = 565;
     leftEarCenterY = 100;
@@ -455,14 +452,17 @@ void ofApp::mousePressed(int x, int y, int button){
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
 //            frames[i]->height = 10;
-            frames[i]->startClick = true;
+//            frames[i]->startClick = true;
+            for (int i = 0; i < numOfFrames; i++){
+                frames[i]->endClick = false;
+            }
             whatObjectIsClicked = 1;
         }
-        if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
-            //            frames[i]->height = 10;
-            frames[i]->startClick = false;
-            
-        }
+//        if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
+//            //            frames[i]->height = 10;
+//            frames[i]->startClick = false;
+//            
+//        }
         cout<<i<<endl;
     }
     
@@ -481,15 +481,23 @@ void ofApp::mousePressed(int x, int y, int button){
 }
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
+//    for (int i =0; i < numOfFrames; i ++){
+//        if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
+//            frames[i]->endClick = false;
+//        }
+//    }
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
             whatObjectIsClicked = 1;
             frames[i]->endClick = true;
         }
-        if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
-            //            frames[i]->height = 10;
-            frames[i]->endClick = false;
-        }
+//        if (whatObjectIsClicked ==1){
+//
+//            if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
+//                //            frames[i]->height = 10;
+//                frames[i]->endClick = false;
+//            }
+//        }
     }
     head->xPos = 620;
     head->yPos = 305;
@@ -517,36 +525,87 @@ void ofApp::mouseReleased(int x, int y, int button){
     ear2->transY = initialEar2Y;
     
     if (headBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " head ";
+        dontChangeState = true;
+        whatObjectIsClicked = 2;
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " head ";
+            }
+        }
+        
     }
     if (leftEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " eye ";
+        whatObjectIsClicked = 3;
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " eye ";
+            }
+        }
     }
     if (rightEyeBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " eye ";
+        whatObjectIsClicked = 3;
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " eye ";
+            }
+        }
     }
-    if (body1BeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " body ";
+    if (body1BeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " body ";
+            }
+        }
+        whatObjectIsClicked =4;
     }
     if (arm1BeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " arm ";
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " arm ";
+            }
+        }
+        whatObjectIsClicked = 5;
     }
     if (arm2BeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " arm ";
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " arm ";
+            }
+        }
+        whatObjectIsClicked = 5;
     }
     if (leftLegBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " leg ";
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " leg ";
+            }
+        }
+        whatObjectIsClicked = 6;
     }
     if (rightLegBeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " leg ";
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " leg ";
+            }
+        }
+        whatObjectIsClicked = 6;
     }
     if (leftEarBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " ear ";
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " ear ";
+            }
+        }
+        whatObjectIsClicked = 7;
     }
     if (rightEarBeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
-        frames[0]->typed->typedInput = frames[0]->typed->typedInput + " ear ";
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " ear ";
+            }
+        }
+        whatObjectIsClicked = 7;
     }
-
 }
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){

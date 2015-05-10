@@ -86,7 +86,7 @@ class ofApp : public ofBaseApp{
     
     UIButton * plusButton;
     UIButton * minusButton;
-    
+    bool dontChangeState;
     ofImage logo;
     
 private:
