@@ -14,7 +14,7 @@ void ofApp::setup(){
     halfH = frameHeight/2;
     halfW = frameWidth/2;
     buffer = 20;
-    numOfFrames = 9;
+    numOfFrames = 200;
     numOfColumns = 3;
     
     this->editor = new CodeEditor(800,50,505,700);
@@ -112,11 +112,19 @@ void ofApp::setup(){
     //defaulting frames[0] as current
     frames[0]->frameIsCurrent();
     
+
+    
     transparent.afterMainSetup(ofxTransparentWindow::NORMAL);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    if (startingFrameCount == true){
+        numOfFrames = 1;
+    }
+    if (startingColumnCount == true){
+        numOfColumns = 3;
+    }
     transparent.update();
 //    parser->update();
 //    for (int i = 0; i < numOfFrames; i ++){
@@ -133,7 +141,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    
 //    if(parser->renderWindowHideWindow == true) {
 //        parser->renderWindowWithCode = false;
 //        secondWindow->hide();
@@ -165,7 +173,7 @@ void ofApp::draw(){
     
     if(frames[0]->parser->playWindow == true && secondWindowRendered == false){
         this->secondWindow = new MultipleWindows(300, 300);
-        secondWindow->setup("second window", 10, 10, 300, 300, false);
+        secondWindow->setup("second window", 900, 10, 300, 300, false);
         secondWindowRendered = true;
     }
     if(frames[0]->parser->eye == true && secondWindowRendered == true){
@@ -179,7 +187,22 @@ void ofApp::draw(){
         ofEllipse(100,100,100,100);
         secondWindow->end();
     }
-    
+//    if(frames[1]->parser->playWindow == true && secondWindowRendered == false){
+//        this->secondWindow = new MultipleWindows(300, 300);
+//        secondWindow->setup("second window", 10, 10, 300, 300, false);
+//        secondWindowRendered = true;
+//    }
+//    if(frames[1]->parser->eye == true && secondWindowRendered == true){
+//        secondWindow->begin();
+//        ofEllipse(10,10,10,10);
+//        secondWindow->end();
+//        
+//    }
+//    if (frames[1]->parser->ear == true && secondWindowRendered == true){
+//        secondWindow->begin();
+//        ofEllipse(100,100,100,100);
+//        secondWindow->end();
+//    }
     
 //    if(parser->renderWindow == true){
 //        secondWindow.begin();
@@ -193,7 +216,20 @@ void ofApp::draw(){
     ofColor lavender = ofColor(176,183,255);
     transparent.update();
     ofSetCircleResolution(30);
+    // drawing lines between frames
     
+    for (int i = 0; i < numOfFrames; i++){
+        if (frames[i]->startClick ==true){
+            ofPoint start = ofPoint (frames[i]->xPos + frames[i]->width/2, frames[i]->yPos + frames[i]->height/2);
+            for (int i = 0; i < numOfFrames; i++){
+                if (frames[i]->endClick == true){
+                    ofPoint end = ofPoint (frames[i]->xPos + frames[i]->width/2, frames[i]->yPos + frames[i]->height/2);
+                    ofSetColor(lightRed);
+                    ofLine(start,end);
+                }
+            }
+        }
+    }
     //to be used to calculate area of body
     areaOfTriangle = (ABS(body1->xPosRight*(body1->yPos - body1->yPosLeft) + body1->xPos *(body1->yPosLeft - body1->yPosRight) + body1->xPosLeft*(body1->xPosRight - body1->yPos))/2);
     editor->draw();
@@ -264,20 +300,10 @@ void ofApp::draw(){
             cout<<i<<endl;
         }
     }
-//        if (frames[i]->endClick == true){
-//            frames[i]->endClicked = true;
-//        }
-//    }
-//    cout<< "frame 0 string: " << frames[0]->typed->typedInput << endl;
-//    cout<< "frame 1 string: " << frames[1]->typed->typedInput << endl;
-//    cout<< "frame 2 string: " << frames[2]->typed->typedInput << endl;
-//    cout<< "frame 3 string: " << frames[3]->typed->typedInput << endl;
-//    cout<< "frame 4 string: " << frames[4]->typed->typedInput << endl;
-//    cout<< "frame 5 string: " << frames[5]->typed->typedInput << endl;
-//    cout<< "frame 6 string: " << frames[6]->typed->typedInput << endl;
-//    cout<< "frame 7 string: " << frames[7]->typed->typedInput << endl;
-//    cout<< "frame 8 string: " << frames[8]->typed->typedInput << endl;
-
+//    ofBackground(100,100,100);
+    ofSetColor(100, 100, 100, 200);
+    ofRect(0, 0, 1000, 10);
+    ofRect(0,0,10,1000);
 
 }
 
@@ -376,20 +402,35 @@ void ofApp::mouseMoved(int x, int y ){
     
     if (areaOfSubtriangle1 + areaOfSubtriangle2 + areaOfSubtriangle3 == areaOfTriangle + 75* body1->xPosLeft && head->mouseOver != true){
         body1->mouseOver = true;
-        numOfFrames = 9;
-        numOfColumns = 3;
+//        numOfFrames = 9;
+//        numOfColumns = 3;
     }
     else {
         body1->mouseOver = false;
     }
 
     if (x >= plusButton->xPos && x <= plusButton->xPos + plusButton->width && x>= plusButton->yPos && x <= plusButton->yPos + plusButton->height){
-        plusButton->defaultColor = ofColor(255, 0, 0);
+        plusButton->defaultColor = lightRed;
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
+    
+    if (y >=0 && y <= 10){
+        for (int i = 0; i < numOfFrames; i++){
+            if (frames[i]->endClick == true){
+                frames[i]->width = frames[i]->width + int(x/20);
+            }
+        }
+//        startingColumnCount = false;
+//        numOfColumns = int(x/30);
+        
+    }
+    if (x>=0 && x<=10){
+        startingFrameCount = false;
+        numOfFrames = int(y/10);
+    }
     
     if(head->mouseOver == true){
         head->xPos = x;
@@ -497,6 +538,7 @@ void ofApp::mousePressed(int x, int y, int button){
     
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
+            frames[i]->startClick = true;
 //            frames[i]->height = 10;
 //            frames[i]->startClick = true;
             for (int i = 0; i < numOfFrames; i++){

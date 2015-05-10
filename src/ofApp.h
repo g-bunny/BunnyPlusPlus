@@ -99,7 +99,10 @@ class ofApp : public ofBaseApp{
     ofColor darkerTeal = ofColor(168, 235, 220);
     ofColor darkestTeal = ofColor(150, 225, 210);
     
+    ofColor lightRed = ofColor(242,105,105);
     
+    bool startingFrameCount = true;
+    bool startingColumnCount = true;
 private:
     ofxTransparentWindow transparent;
 
