@@ -22,6 +22,7 @@ Head::Head(float scaleX, float scaleY, float scaleZ, int xPos, int yPos, int wid
 
 void Head::draw(){
     ofPushMatrix();
+    ofSetCircleResolution(40);
     ofSetColor(color);
     if (mouseOver == true) { ofSetColor(mouseOverColor);}
     ofScale(scaleX,scaleY,scaleZ);
