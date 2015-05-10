@@ -153,11 +153,29 @@ void ofApp::draw(){
 //            secondWindow->setup("second window", 10, 10, 300, 300, false);
 //            secondWindowRendered = true;
 //        }
+//    }
+//    for (int i; i < numOfFrames; i++){
+//        if(frames[i]->parser->eye == true && secondWindowRendered == true){
+//            secondWindow->begin();
+//            ofEllipse(10,10,10,10);
+//            secondWindow->end();
+//            
+//        }
+//    }
     
     if(frames[0]->parser->playWindow == true && secondWindowRendered == false){
         this->secondWindow = new MultipleWindows(300, 300);
         secondWindow->setup("second window", 10, 10, 300, 300, false);
         secondWindowRendered = true;
+    }
+    if(frames[0]->parser->eye == true && secondWindowRendered == true){
+        secondWindow->begin();
+        ofEllipse(10,10,10,10);
+        secondWindow->end();
+        
+    } else {
+//        secondWindow->begin();
+//        secondWindow->end();
     }
     
     

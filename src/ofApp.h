@@ -31,7 +31,6 @@ class ofApp : public ofBaseApp{
 //    vector<int> startFrame;
 //    vector<int> endFrame;
     vector <Frame*> frames;
-
     
     Frame *testFrame;
     int numOfFrames;
@@ -60,21 +59,20 @@ class ofApp : public ofBaseApp{
     
     Parser * parser;
     vector <string> currentString;
+    
     float areaOfTriangle;
     float areaOfSubtriangle1;
     float areaOfSubtriangle2;
     float areaOfSubtriangle3;
+    
     int bodyCenterPointX;
     int bodyCenterPointY;
     int bodyDifferenceX;
     int bodyDifferenceY;
-    
+
     int leftArmCenterX, leftArmCenterY, rightArmCenterX, rightArmCenterY, leftLegCenterX, leftLegCenterY, rightLegCenterX, rightLegCenterY, leftEarCenterX, leftEarCenterY, rightEarCenterX, rightEarCenterY;
-    
     int initialArm1X, initialArm1Y, initialArm2X, initialArm2Y, initialLeg1X, initialLeg1Y, initialLeg2X, initialLeg2Y, initialEar1X, initialEar1Y, initialEar2X, initialEar2Y;
-    
     ofTrueTypeFont verdana;
-    
     bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged, body1BeingDragged, arm1BeingDragged, arm2BeingDragged, leftEarBeingDragged, rightEarBeingDragged, leftLegBeingDragged, rightLegBeingDragged;
     bool secondWindowRendered;
     
