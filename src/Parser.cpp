@@ -24,11 +24,24 @@ void Parser::update(){
     tokens = ofSplitString(toBeParsed, " ");
     for (string n : tokens) cout << n << ' ';
     
-    if (tokens[0] =="play"){
-        playWindow = true;
-        cout<< "playWindow is" << playWindow << endl;
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] =="play"){
+            playWindow = true;
+            cout<< "playWindow is " << playWindow << endl;
+        }
     }
-    
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] =="eye"){
+            eye = true;
+            cout<< "eye is " << eye << endl;
+        }
+    }
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] =="shape" && eye == true){
+            shape = true;
+            cout<< "playWindow is" << shape << endl;
+        }
+    }
 //    for (int i=0; i < tokens.size(); i++){
 //        if (tokens[i] =="head"){
 //            //when there is no head in the code, the head state is 0. if 1 head found, head state is 1
