@@ -19,7 +19,8 @@ public:
     string toBeParsed;
     int tokenLength;
     bool empty;
-    bool playWindow, renderWindowWithCode, renderWindowHideWindow;
+    bool playWindow = false;
+    bool renderWindowWithCode, renderWindowHideWindow;
     
     int head, ear, eye, body, arm, leg, bubble;
 //    ofTrueTypeFont myFont;
