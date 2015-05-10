@@ -145,14 +145,20 @@ void ofApp::draw(){
 //        ofSetColor(255);
 //        ofEllipse(20, 20, 20, 20);
 //        secondWindow->end();
-//        cout << parser[0]->renderWindowWithCode << endl;
+////        cout << parser[0]->renderWindowWithCode << endl;
 //    }
-//    
-//    if(parser->renderWindow == true && secondWindowRendered == false){
-//        this->secondWindow = new MultipleWindows(300, 300);
-//        secondWindow->setup("second window", 10, 10, 300, 300, false);
-//        secondWindowRendered = true;
-//    }
+//    for (int i; i < numOfFrames; i++){
+//        if(frames[i]->parser->playWindow == true && secondWindowRendered == false){
+//            this->secondWindow = new MultipleWindows(300, 300);
+//            secondWindow->setup("second window", 10, 10, 300, 300, false);
+//            secondWindowRendered = true;
+//        }
+    
+    if(frames[0]->parser->playWindow == true && secondWindowRendered == false){
+        this->secondWindow = new MultipleWindows(300, 300);
+        secondWindow->setup("second window", 10, 10, 300, 300, false);
+        secondWindowRendered = true;
+    }
     
     
 //    if(parser->renderWindow == true){
@@ -221,7 +227,6 @@ void ofApp::draw(){
         }
     }
 //    verdana.drawString(frames[currentFrameState]->typed->typedInput, editor->textStartX, editor->textStartY);
-
 
 //    for (int i = 0; i < numOfFrames; i++){
 //        if (frames[i]->currentFrame == true){
