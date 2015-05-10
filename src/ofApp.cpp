@@ -43,6 +43,8 @@ void ofApp::setup(){
     initialLeg2Y = 502;
     this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg1X, initialLeg1Y, 100, 10,darkestTeal, false);
     this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg2X, initialLeg2Y, 100, -10,darkestTeal, false);
+    leg1->mouseOverColor = ofColor(104,200,0,180);
+    leg2->mouseOverColor = ofColor(104,200,0,180);
     
     const float armScaleX = 0.8f;
     const float armScaleY = 0.8f;
@@ -70,8 +72,10 @@ void ofApp::setup(){
     const float rightEyeScaleY = identityScale;
     const float rightEyeScaleZ = identityScale;
     this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 10, 10, black, false);
-
     
+    this->bubble = new Bubble(1, 1, 1, 0, 0, 0, 815, 261, 760, 322, 780, 300, ofColor(255,200,200), false);
+    
+
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
         frames.resize(numOfFrames);
@@ -177,6 +181,7 @@ void ofApp::draw(){
     head->draw();
     leftEye->draw();
     rightEye->draw();
+    bubble->draw();
 
 
     plusButton->drawPlus();
@@ -186,7 +191,7 @@ void ofApp::draw(){
         frames[i]->frameColor = lavender;
         frames[i]->draw();
     }
-        logo.draw(editor->xPos, editor->yPos, 50, 60);
+        logo.draw(editor->xPos, editor->yPos + editor->height - 60, 50, 60);
 //      cout << frames[0]->startClick <<endl;
 //    ofSetColor(0, 0, 0);
 //    ofBeginShape();

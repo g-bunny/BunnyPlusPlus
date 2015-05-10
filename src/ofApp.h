@@ -8,6 +8,7 @@
 #include "Head.h"
 #include "Body.h"
 #include "CodeEditor.h"
+#include "Bubble.h"
 //#include "Parser.h"
 
 class ofApp : public ofBaseApp{
@@ -53,6 +54,7 @@ class ofApp : public ofBaseApp{
     Head *head;
     Head *leftEye;
     Head *rightEye;
+    Bubble *bubble;
     
     CodeEditor *editor;
     
