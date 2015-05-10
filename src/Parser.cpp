@@ -42,6 +42,12 @@ void Parser::update(){
             cout<< "playWindow is" << shape << endl;
         }
     }
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] =="ear"){
+            ear = true;
+            cout<< "playWindow is" << ear << endl;
+        }
+    }
 //    for (int i=0; i < tokens.size(); i++){
 //        if (tokens[i] =="head"){
 //            //when there is no head in the code, the head state is 0. if 1 head found, head state is 1

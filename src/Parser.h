@@ -22,8 +22,8 @@ public:
     bool playWindow = false;
     bool renderWindowWithCode, renderWindowHideWindow;
     
-    bool head, ear, eye = false;
-    bool body, arm, leg, bubble;
+    bool head = false, ear = false, eye = false;
+    bool body = false, arm = false, leg = false, bubble = false;
     bool shape, circle, color, red;
 //    ofTrueTypeFont myFont;
 };
