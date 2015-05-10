@@ -194,7 +194,20 @@ void ofApp::draw(){
     for (int i = 0; i < numOfFrames; i++){
         if (frames[i]->endClick == true){
             verdana.drawString(frames[i]->typed->typedInput, editor->textStartX, editor->textStartY);
-
+            stringWidth = stringInitialWidth + verdana.stringWidth(frames[i]->typed->typedInput);
+            float stringHeight = verdana.stringHeight(frames[i]->typed->typedInput);
+            cout <<"string width is " << stringWidth <<endl;
+            if (stringWidth >= maxStringWidth){
+                stringMaxReached = true;
+            }
+            if (stringMaxReached == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + '\n';
+                stringMaxReached = false;
+                stringInitialWidth = -1 * maxStringWidth;
+            }
+            
+            
+//            cout << float ofTrueTypeFont::stringWidth(frames[i]->typed->typedInput) <<endl;
 //            i = currentFrameState;
         }
     }
@@ -231,7 +244,6 @@ void ofApp::draw(){
 //    cout<< "frame 7 string: " << frames[7]->typed->typedInput << endl;
 //    cout<< "frame 8 string: " << frames[8]->typed->typedInput << endl;
 
-    
 
 }
 
@@ -491,13 +503,7 @@ void ofApp::mouseReleased(int x, int y, int button){
             whatObjectIsClicked = 1;
             frames[i]->endClick = true;
         }
-//        if (whatObjectIsClicked ==1){
-//
-//            if (x< frames[i]->xPos || x > frames[i]->xPos + frameWidth || y < frames[i]->yPos || y > frames[i]->yPos + frameHeight){
-//                //            frames[i]->height = 10;
-//                frames[i]->endClick = false;
-//            }
-//        }
+
     }
     head->xPos = 620;
     head->yPos = 305;

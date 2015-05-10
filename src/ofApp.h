@@ -89,6 +89,11 @@ class ofApp : public ofBaseApp{
     bool dontChangeState;
     ofImage logo;
     
+    int maxStringWidth = 485;
+    float stringWidth;
+    float stringInitialWidth = 0;
+    bool stringMaxReached;
+    
 private:
     ofxTransparentWindow transparent;
 
