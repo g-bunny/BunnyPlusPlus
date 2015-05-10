@@ -173,9 +173,11 @@ void ofApp::draw(){
         ofEllipse(10,10,10,10);
         secondWindow->end();
         
-    } else {
-//        secondWindow->begin();
-//        secondWindow->end();
+    }
+    if (frames[0]->parser->ear == true && secondWindowRendered == true){
+        secondWindow->begin();
+        ofEllipse(100,100,100,100);
+        secondWindow->end();
     }
     
     
