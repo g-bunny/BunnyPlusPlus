@@ -6,9 +6,26 @@
 //
 //
 
-#ifndef __BunnyPlusPlus__Bubble__
-#define __BunnyPlusPlus__Bubble__
+#include "ofMain.h"
 
-#include <stdio.h>
-
-#endif /* defined(__BunnyPlusPlus__Bubble__) */
+class Bubble{
+public:
+    
+    Bubble(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, int xPos, int yPos, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight, ofColor color, bool mouseOver);
+    
+    void draw();
+    int xPos;
+    int yPos;
+    int xPosLeft;
+    int yPosLeft;
+    int xPosRight;
+    int yPosRight;
+    //    int width;
+    //    int height;
+    int transX, transY, transZ;
+    float scaleX, scaleY, scaleZ;
+    bool mouseOver;
+    //    float rotateAngle;
+    ofColor color;
+    ofColor mouseOverColor = ofColor(200,100,100,180);
+};
