@@ -11,19 +11,13 @@
 class Bubble{
 public:
     
-    Bubble(float scaleX, float scaleY, float scaleZ, int transX, int transY, int transZ, int xPos, int yPos, int xPosLeft, int yPosLeft, int xPosRight, int yPosRight, ofColor color, bool mouseOver);
+    Bubble(int xPos, int yPos, int width, int height, ofColor color, bool mouseOver);
     
     void draw();
     int xPos;
     int yPos;
-    int xPosLeft;
-    int yPosLeft;
-    int xPosRight;
-    int yPosRight;
-    //    int width;
-    //    int height;
-    int transX, transY, transZ;
-    float scaleX, scaleY, scaleZ;
+    int width;
+    int height;
     bool mouseOver;
     //    float rotateAngle;
     ofColor color;
