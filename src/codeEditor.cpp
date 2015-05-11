@@ -31,5 +31,5 @@ void CodeEditor::draw(){
     ofRect(xPos + 10, yPos + 10, width - 20, 10);
     textAreaWidth = width - 20;
     textStartX = xPos + 10;
-    textStartY = yPos + 35;
+    textStartY = yPos + 45;
 }
