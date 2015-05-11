@@ -61,6 +61,8 @@ void MultipleWindows::show(){
 
 void MultipleWindows::hide(){
     glfwHideWindow(auxWindow);
+    glfwDestroyWindow(auxWindow);
+
 }
 void MultipleWindows::mousePressed(int x, int y, int button){
     //    if(mouseDragged == true){
