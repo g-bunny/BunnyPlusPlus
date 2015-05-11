@@ -47,6 +47,13 @@ void Parser::update(){
             ear = true;
             cout<< "playWindow is" << ear << endl;
         }
+        
+    }
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] == "body"){
+            body = true;
+            cout << "body is " << body << endl;
+        }
     }
 //    for (int i=0; i < tokens.size(); i++){
 //        if (tokens[i] =="head"){
