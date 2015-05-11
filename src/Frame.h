@@ -22,6 +22,7 @@ public:
     void keyReleased(int key);
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
+    void mouseDragged(int x, int y, int button);
     void frameIsCurrent();
     //    void resize();
     int xPos, yPos, width, height;
@@ -44,6 +45,12 @@ public:
     UIButton * playButton;
     UIButton * stopButton;
     
-    bool playThisFrame;
+    bool playThisFrame = false;
+    
+    bool lineTo = false;
+    bool lineFrom = false;
+    bool lineBeingDragged = false;
+    bool lineStart = false;
+    bool lineEnd = false;
     
 };

@@ -89,26 +89,39 @@ void Frame::draw(){
 //        startClick = false;
 //        endClick = false;
     cout<<"playThisFrame"<<playThisFrame<<endl;
-
+    
+    if (lineFrom == true){
+        lineStart = true;
     }
+    
+    if(lineTo == true){
+        lineEnd = true;
+    }
+}
 //    if (startClicked == true && endClicked == true){
 //        ofSetColor(255, 255, 255, 100);
 //        ofRect(xPos + 10, yPos + 10, width, height);
 //        currentFrame = true;
 //    }
 //}
-//void Frame::mousePressed(int x, int y, int button){
-//    startClick = true;
-//    cout<<"HI"<<endl;
-//}
+void Frame::mousePressed(int x, int y, int button){
+    if (x >=xPos && x <=xPos + width && y >=yPos && y <=yPos + height){
+        lineFrom = true;
+    }
+}
 //
 void Frame::mouseReleased(int x, int y, int button){
     if (x >= playButton->xPos && x <= playButton->xPos + playButton->width && y <= playButton->yPos && y >= playButton->yPos + playButton->width){
         playThisFrame = true;
         cout<<"playThisFrame"<<playThisFrame<<endl;
     } else {playThisFrame = false;}
+    if (x >=xPos && x <=xPos + width && y >=yPos && y <=yPos + height){
+        lineTo = true;
+    }
 }
-
+void Frame::mouseDragged(int x, int y, int button){
+    
+}
 void Frame::frameIsCurrent(){
     ofSetColor(255,0,0);
     ofNoFill();
