@@ -24,6 +24,7 @@ public:
     
     bool head = false, ear = false, eye = false;
     bool body = false, arm = false, leg = false, bubble = false;
+    bool stop = false;
     bool shape, circle, color, red;
 //    ofTrueTypeFont myFont;
 };

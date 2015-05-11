@@ -55,6 +55,18 @@ void Parser::update(){
             cout << "body is " << body << endl;
         }
     }
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] == "bubble"){
+            bubble = true;
+            cout << "bubble is " << bubble << endl;
+        }
+    }
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] == "stop"){
+            bubble = true;
+            cout << "stop is " << stop << endl;
+        }
+    }
 //    for (int i=0; i < tokens.size(); i++){
 //        if (tokens[i] =="head"){
 //            //when there is no head in the code, the head state is 0. if 1 head found, head state is 1
