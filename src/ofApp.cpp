@@ -181,7 +181,7 @@ void ofApp::draw(){
     }
     if(frames[0]->parser->eye == true && secondWindowRendered == true){
         secondWindow->begin();
-        ofEllipse(10,10,10,10);
+        flyingBunny.draw(0,300,200,90);
         secondWindow->end();
         
     }
@@ -191,14 +191,22 @@ void ofApp::draw(){
         secondWindow->end();
     }
     if(frames[0]->parser->bubble == true && secondWindowRendered == true){
-    }
+        secondWindow->begin();
+        ofSetColor(255,255,255);
+        verdana.drawString("Hello World", 300, 100);
+        secondWindow->end();
 
+    }
+    if(frames[0]->parser->stop == true && secondWindowRendered == true){
+        secondWindow->hide();
+        
+    }
     if (frames[0]->parser->body == true && secondWindowRendered == true){
         secondWindow->begin();
         float bunnyXPos;
         float bunnyYPos;
         float startingXPos = 0;
-        float startingYPos = 500;
+        float startingYPos = 300;
         float xPosMoving;
             bunnyXPos = startingXPos;
         
@@ -707,7 +715,7 @@ void ofApp::mouseReleased(int x, int y, int button){
         }
         whatObjectIsClicked = 6;
     }
-    if (rightLegBeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
+    if (rightLegBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
         for (int i = 0; i < numOfFrames; i ++){
             if (frames[i]->endClick == true){
                 frames[i]->typed->typedInput = frames[i]->typed->typedInput + " leg ";
@@ -723,13 +731,21 @@ void ofApp::mouseReleased(int x, int y, int button){
         }
         whatObjectIsClicked = 7;
     }
-    if (rightEarBeingDragged == true && x > editor->xPos && x < editor->yPos + editor->width){
+    if (rightEarBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
         for (int i = 0; i < numOfFrames; i ++){
             if (frames[i]->endClick == true){
                 frames[i]->typed->typedInput = frames[i]->typed->typedInput + " ear ";
             }
         }
         whatObjectIsClicked = 7;
+    }
+    if (bubbleBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
+        for (int i = 0; i < numOfFrames; i ++){
+            if (frames[i]->endClick == true){
+                frames[i]->typed->typedInput = frames[i]->typed->typedInput + " bubble ";
+            }
+        }
+        whatObjectIsClicked = 8;
     }
 }
 //--------------------------------------------------------------
