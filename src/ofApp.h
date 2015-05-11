@@ -73,7 +73,7 @@ class ofApp : public ofBaseApp{
     int leftArmCenterX, leftArmCenterY, rightArmCenterX, rightArmCenterY, leftLegCenterX, leftLegCenterY, rightLegCenterX, rightLegCenterY, leftEarCenterX, leftEarCenterY, rightEarCenterX, rightEarCenterY;
     int initialArm1X, initialArm1Y, initialArm2X, initialArm2Y, initialLeg1X, initialLeg1Y, initialLeg2X, initialLeg2Y, initialEar1X, initialEar1Y, initialEar2X, initialEar2Y;
     ofTrueTypeFont verdana;
-    bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged, body1BeingDragged, arm1BeingDragged, arm2BeingDragged, leftEarBeingDragged, rightEarBeingDragged, leftLegBeingDragged, rightLegBeingDragged;
+    bool headBeingDragged, rightEyeBeingDragged, leftEyeBeingDragged, body1BeingDragged, arm1BeingDragged, arm2BeingDragged, leftEarBeingDragged, rightEarBeingDragged, leftLegBeingDragged, rightLegBeingDragged, bubbleBeingDragged;
     bool secondWindowRendered;
     
     MultipleWindows *secondWindow;
@@ -88,6 +88,7 @@ class ofApp : public ofBaseApp{
     UIButton * minusButton;
     bool dontChangeState;
     ofImage logo;
+    ofImage flyingBunny;
     
     int maxStringWidth = 485;
     float stringWidth;
@@ -103,6 +104,9 @@ class ofApp : public ofBaseApp{
     
     bool startingFrameCount = true;
     bool startingColumnCount = true;
+    
+    //secondwindow
+    float xPosMovingRight;
 private:
     ofxTransparentWindow transparent;
 

@@ -4,20 +4,21 @@
 void ofApp::setup(){
     
     logo.loadImage("bunnyPlusPlusLogo.png");
+    flyingBunny.loadImage("flyingBunny.png");
     ofTrueTypeFont::setGlobalDpi(72);
     verdana.loadFont("verdana.ttf", 20,true, true);
     verdana.setLineHeight(18.0f);
     verdana.setLetterSpacing(1.037);
     
-    frameHeight = 90;
-    frameWidth = 90;
+    frameHeight = 125;
+    frameWidth = 125;
     halfH = frameHeight/2;
     halfW = frameWidth/2;
     buffer = 20;
     numOfFrames = 200;
     numOfColumns = 3;
     
-    this->editor = new CodeEditor(800,50,505,700);
+    this->editor = new CodeEditor(1000,50,505,700);
     
     const float identityScale = 1.0f;
     const ofColor black = ofColor(0, 0, 0);
@@ -27,9 +28,9 @@ void ofApp::setup(){
     const float earScaleX = 0.8f;
     const float earScaleY = identityScale;
     const float earScaleZ = identityScale;
-    initialEar1X = 605;
+    initialEar1X = 625;
     initialEar1Y = 295;
-    initialEar2X = 695;
+    initialEar2X = 715;
     initialEar2Y = 295;
     this->ear1 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar1X, initialEar1Y, 100, 180, lighterTeal, false);
     this->ear2 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar2X, initialEar2Y, 100, 180, lighterTeal, false);
@@ -37,9 +38,9 @@ void ofApp::setup(){
     const float legScaleX = 0.8;
     const float legScaleY = 1.0f;
     const float legScaleZ = 1.0f;
-    initialLeg1X = 585;
+    initialLeg1X = 605;
     initialLeg1Y = 495;
-    initialLeg2X = 625;
+    initialLeg2X = 645;
     initialLeg2Y = 502;
     this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg1X, initialLeg1Y, 100, 10,darkestTeal, false);
     this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg2X, initialLeg2Y, 100, -10,darkestTeal, false);
@@ -49,9 +50,9 @@ void ofApp::setup(){
     const float armScaleX = 0.8f;
     const float armScaleY = 0.8f;
     const float armScaleZ = identityScale;
-    this->arm1 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 618, 380, 50, 90, darkestTeal, false);
+    this->arm1 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 628, 380, 50, 90, darkestTeal, false);
     arm1->mouseOverColor = ofColor(255,100,100);
-    this->arm2 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 632, 425, 50, 270, darkestTeal, false);
+    this->arm2 = new WaterDrop(armScaleX, armScaleY, armScaleZ, 642, 425, 50, 270, darkestTeal, false);
     arm2->mouseOverColor = ofColor(255,100,100);
     const float bodyScaleX = 1.0f;
     const float bodyScaleY = 1.0f;
@@ -73,8 +74,9 @@ void ofApp::setup(){
     const float rightEyeScaleZ = identityScale;
     this->rightEye = new Head(rightEyeScaleX, rightEyeScaleY, rightEyeScaleZ, 661, 328, 10, 10, black, false);
     
-    this->bubble = new Bubble(1, 1, 1, 0, 0, 0, 815, 261, 760, 322, 780, 300, ofColor(255,200,200), false);
+    this->bubble = new Bubble(815,261,160,122,lightRed, false);
     
+        ofEllipse(815, 261, 160, 122);
 
     const ofColor lavender = ofColor(176,183,255);
     for (int i = 0; i < numOfFrames; i++){
@@ -170,10 +172,11 @@ void ofApp::draw(){
 //            
 //        }
 //    }
-    
+    xPosMovingRight = (ofGetElapsedTimeMillis() % 10000) / 10;
+
     if(frames[0]->parser->playWindow == true && secondWindowRendered == false){
         this->secondWindow = new MultipleWindows(300, 300);
-        secondWindow->setup("second window", 900, 10, 300, 300, false);
+        secondWindow->setup("second window", 800, 10, 1000, 500, false);
         secondWindowRendered = true;
     }
     if(frames[0]->parser->eye == true && secondWindowRendered == true){
@@ -185,6 +188,28 @@ void ofApp::draw(){
     if (frames[0]->parser->ear == true && secondWindowRendered == true){
         secondWindow->begin();
         ofEllipse(100,100,100,100);
+        secondWindow->end();
+    }
+    if(frames[0]->parser->bubble == true && secondWindowRendered == true){
+    }
+
+    if (frames[0]->parser->body == true && secondWindowRendered == true){
+        secondWindow->begin();
+        float bunnyXPos;
+        float bunnyYPos;
+        float startingXPos = 0;
+        float startingYPos = 500;
+        float xPosMoving;
+            bunnyXPos = startingXPos;
+        
+        bunnyXPos = 0;
+        bunnyYPos = 400;
+        //        logo.draw(editor->xPos, editor->yPos + editor->height - 60, 50, 60);
+        flyingBunny.draw(bunnyXPos + xPosMovingRight, startingYPos, 200,90);
+        //ofEllipse(bunnyXPos + xPosMoving, bunnyYPos, 90, 90);
+        //cout << ofGetElapsedTimeMillis() << endl;
+
+
         secondWindow->end();
     }
 //    if(frames[1]->parser->playWindow == true && secondWindowRendered == false){
@@ -302,8 +327,8 @@ void ofApp::draw(){
     }
 //    ofBackground(100,100,100);
     ofSetColor(100, 100, 100, 200);
-    ofRect(0, 0, 1000, 10);
-    ofRect(0,0,10,1000);
+    ofRect(0, 0, 460, 10);
+    ofRect(0,0,10,800);
 
 }
 
@@ -342,6 +367,14 @@ void ofApp::mouseMoved(int x, int y ){
         head->mouseOver = true;
     }else{
         head->mouseOver = false;
+    }
+    
+    //checking if in bubble
+    //    ofEllipse(815, 261, 160, 122);
+    if(ofDist(815,261,x,y) <= 150){
+        bubble->mouseOver = true;
+    }else{
+        bubble->mouseOver = false;
     }
     leftArmCenterX = 500;
     leftArmCenterY = 402;
@@ -421,6 +454,7 @@ void ofApp::mouseDragged(int x, int y, int button){
         for (int i = 0; i < numOfFrames; i++){
             if (frames[i]->endClick == true){
                 frames[i]->width = frames[i]->width + int(x/20);
+                buffer = buffer + int(x/20);
             }
         }
 //        startingColumnCount = false;
@@ -448,6 +482,13 @@ void ofApp::mouseDragged(int x, int y, int button){
         rightEyeBeingDragged = true;
     }
     
+    if(bubble->mouseOver == true){
+        bubble->xPos = x;
+        bubble->yPos = y;
+        bubbleBeingDragged = true;
+    }
+    
+    
     //arms
     
     leftArmCenterX = 500;
@@ -456,12 +497,12 @@ void ofApp::mouseDragged(int x, int y, int button){
     rightArmCenterY = 402;
     
     if(arm1->mouseOver == true){
-        arm1->transX = 618 + (x - leftArmCenterX);
+        arm1->transX = 628 + (x - leftArmCenterX);
         arm1->transY = 380 + (y - leftArmCenterY);
         arm1BeingDragged = true;
     }
     if(arm2->mouseOver == true){
-        arm2->transX = 632 + (x - rightArmCenterX);
+        arm2->transX = 642 + (x - rightArmCenterX);
         arm2->transY = 425 + (y - rightArmCenterY);
         arm2BeingDragged = true;
     }
@@ -535,6 +576,7 @@ void ofApp::mousePressed(int x, int y, int button){
     leftEarBeingDragged = false;
     rightEarBeingDragged =  false;
     body1BeingDragged = false;
+    bubbleBeingDragged = false;
     
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
@@ -593,9 +635,9 @@ void ofApp::mouseReleased(int x, int y, int button){
     body1->yPosLeft = 600;
     body1->xPosRight = 750;
     body1->yPosRight = 600;
-    arm1->transX = 618;
+    arm1->transX = 628;
     arm1->transY = 380;
-    arm2->transX = 632;
+    arm2->transX = 642;
     arm2->transY = 425;
     leg1->transX = initialLeg1X;
     leg1->transY = initialLeg1Y;
@@ -605,7 +647,8 @@ void ofApp::mouseReleased(int x, int y, int button){
     ear1->transY = initialEar1Y;
     ear2->transX = initialEar2X;
     ear2->transY = initialEar2Y;
-    
+    bubble->xPos = 815;
+    bubble->yPos = 261;
     if (headBeingDragged == true && x > editor->xPos && x < editor->xPos + editor->width){
         dontChangeState = true;
         whatObjectIsClicked = 2;
