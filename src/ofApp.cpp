@@ -179,7 +179,7 @@ void ofApp::draw(){
         secondWindow->setup("second window", 800, 10, 1000, 500, false);
         secondWindowRendered = true;
     }
-    if(frames[0]->parser->eye == true && secondWindowRendered == true){
+    if(frames[0]->parser->body == true && secondWindowRendered == true){
         secondWindow->begin();
         flyingBunny.draw(0,300,200,90);
         secondWindow->end();
@@ -201,7 +201,7 @@ void ofApp::draw(){
         secondWindow->hide();
         
     }
-    if (frames[0]->parser->body == true && secondWindowRendered == true){
+    if (frames[0]->parser->leg == true && secondWindowRendered == true){
         secondWindow->begin();
         float bunnyXPos;
         float bunnyYPos;

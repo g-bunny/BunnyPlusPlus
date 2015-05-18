@@ -63,8 +63,14 @@ void Parser::update(){
     }
     for (int i = 0; i < tokens.size(); i++){
         if (tokens[i] == "stop"){
-            bubble = true;
+            stop = true;
             cout << "stop is " << stop << endl;
+        }
+    }
+    for (int i = 0; i < tokens.size(); i++){
+        if (tokens[i] == "leg"){
+            leg = true;
+            cout << "leg is " << leg << endl;
         }
     }
 //    for (int i=0; i < tokens.size(); i++){
