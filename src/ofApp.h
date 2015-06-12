@@ -104,9 +104,13 @@ class ofApp : public ofBaseApp{
     
     bool startingFrameCount = true;
     bool startingColumnCount = true;
+    bool adjustingFrameNumber = false;
     
     //secondwindow
     float xPosMovingRight;
+    
+//    int mouseY;
+    
 private:
     ofxTransparentWindow transparent;
 

@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
     
     logo.loadImage("bunnyPlusPlusLogo.png");
     flyingBunny.loadImage("flyingBunny.png");
@@ -18,7 +19,7 @@ void ofApp::setup(){
     numOfFrames = 200;
     numOfColumns = 3;
     
-    this->editor = new CodeEditor(1000,50,505,700);
+    this->editor = new CodeEditor(950,50,480,700);
     
     const float identityScale = 1.0f;
     const ofColor black = ofColor(0, 0, 0);
@@ -28,9 +29,9 @@ void ofApp::setup(){
     const float earScaleX = 0.8f;
     const float earScaleY = identityScale;
     const float earScaleZ = identityScale;
-    initialEar1X = 625;
+    initialEar1X = 618;
     initialEar1Y = 295;
-    initialEar2X = 715;
+    initialEar2X = 702;
     initialEar2Y = 295;
     this->ear1 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar1X, initialEar1Y, 100, 180, lighterTeal, false);
     this->ear2 = new WaterDrop(earScaleX, earScaleY, earScaleZ, initialEar2X, initialEar2Y, 100, 180, lighterTeal, false);
@@ -38,9 +39,9 @@ void ofApp::setup(){
     const float legScaleX = 0.8;
     const float legScaleY = 1.0f;
     const float legScaleZ = 1.0f;
-    initialLeg1X = 605;
+    initialLeg1X = 600;
     initialLeg1Y = 495;
-    initialLeg2X = 645;
+    initialLeg2X = 638;
     initialLeg2Y = 502;
     this->leg1 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg1X, initialLeg1Y, 100, 10,darkestTeal, false);
     this->leg2 = new WaterDrop(legScaleX, legScaleY, legScaleZ, initialLeg2X, initialLeg2Y, 100, -10,darkestTeal, false);
@@ -139,11 +140,15 @@ void ofApp::update(){
 //            currentFrameState = i;
 //        }
 //    }
+    if (adjustingFrameNumber == true){
+        cout << "SUP" << endl;
+        numOfFrames = int(mouseY/10);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+    cout << adjustingFrameNumber << endl;
 //    if(parser->renderWindowHideWindow == true) {
 //        parser->renderWindowWithCode = false;
 //        secondWindow->hide();
@@ -287,13 +292,6 @@ void ofApp::draw(){
         frames[i]->draw();
     }
         logo.draw(editor->xPos, editor->yPos + editor->height - 60, 50, 60);
-//      cout << frames[0]->startClick <<endl;
-//    ofSetColor(0, 0, 0);
-//    ofBeginShape();
-//        ofVertex(90, 100);
-//        ofVertex(0, 300);
-//        ofVertex(180, 300);
-//    ofEndShape();
     
     for (int i = 0; i < numOfFrames; i++){
         if (frames[i]->endClick == true){
@@ -336,7 +334,9 @@ void ofApp::draw(){
 //    ofBackground(100,100,100);
     ofSetColor(100, 100, 100, 200);
     ofRect(0, 0, 460, 10);
-    ofRect(0,0,10,800);
+    ofRect(0,0,10,frameHeight + buffer * 2);
+    ofSetColor(80, 80, 200, 200);
+    ofRect(0,0 + mouseY,12,12);
 
 }
 
@@ -453,6 +453,7 @@ void ofApp::mouseMoved(int x, int y ){
     if (x >= plusButton->xPos && x <= plusButton->xPos + plusButton->width && x>= plusButton->yPos && x <= plusButton->yPos + plusButton->height){
         plusButton->defaultColor = lightRed;
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -469,10 +470,10 @@ void ofApp::mouseDragged(int x, int y, int button){
 //        numOfColumns = int(x/30);
         
     }
-    if (x>=0 && x<=10){
-        startingFrameCount = false;
-        numOfFrames = int(y/10);
-    }
+//    if (x>=0 && x<=10){
+//        startingFrameCount = false;
+//        numOfFrames = int(y/10);
+//    }
     
     if(head->mouseOver == true){
         head->xPos = x;
@@ -574,6 +575,15 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    
+    
+    if (x>=0 && x<=10){
+        startingFrameCount = false;
+        adjustingFrameNumber = true;
+    }
+    
+    
+    
     headBeingDragged = false;
     leftEyeBeingDragged = false;
     rightEyeBeingDragged = false;
@@ -624,6 +634,9 @@ void ofApp::mouseReleased(int x, int y, int button){
 //            frames[i]->endClick = false;
 //        }
 //    }
+    if (adjustingFrameNumber == true){
+        adjustingFrameNumber = false;
+    }
     for (int i = 0; i < numOfFrames; i++){
         if (x > frames[i]->xPos && x < frames[i]->xPos + frameWidth && y > frames[i]->yPos && y < frames[i]->yPos + frameHeight){
             whatObjectIsClicked = 1;
